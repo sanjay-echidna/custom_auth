@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\Security;
 
+use Pyz\Yves\CustomAuth\Plugin\Security\YvesCustomAuthSecurityPlugin;
 use Spryker\Yves\Security\Plugin\Security\RememberMeSecurityPlugin;
 use Spryker\Yves\Security\SecurityDependencyProvider as SprykerSecurityDependencyProvider;
 use SprykerShop\Yves\AgentPage\Plugin\Security\YvesAgentPageSecurityPlugin;
@@ -18,6 +19,7 @@ use SprykerShop\Yves\SessionAgentValidation\Plugin\Security\ValidateAgentSession
 use SprykerShop\Yves\SessionCustomerValidationPage\Plugin\Security\SaveCustomerSessionSecurityPlugin;
 use SprykerShop\Yves\SessionCustomerValidationPage\Plugin\Security\ValidateCustomerSessionSecurityPlugin;
 
+
 class SecurityDependencyProvider extends SprykerSecurityDependencyProvider
 {
     /**
@@ -28,12 +30,13 @@ class SecurityDependencyProvider extends SprykerSecurityDependencyProvider
         return [
             new RememberMeSecurityPlugin(),
             new CustomerRememberMeSecurityPlugin(),
-            new YvesAgentPageSecurityPlugin(),
-            new YvesCustomerPageSecurityPlugin(),
-            new ValidateCustomerSessionSecurityPlugin(),
-            new SaveCustomerSessionSecurityPlugin(),
-            new ValidateAgentSessionSecurityPlugin(),
-            new SaveAgentSessionSecurityPlugin(),
+            // new YvesAgentPageSecurityPlugin(),
+            // new YvesCustomerPageSecurityPlugin,
+            new YvesCustomAuthSecurityPlugin(),
+            // new ValidateCustomerSessionSecurityPlugin(),
+            // new SaveCustomerSessionSecurityPlugin(),
+            // new ValidateAgentSessionSecurityPlugin(),
+            // new SaveAgentSessionSecurityPlugin(),
         ];
     }
 
