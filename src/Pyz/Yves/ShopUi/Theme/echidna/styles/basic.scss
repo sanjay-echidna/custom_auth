@@ -1,0 +1,11 @@
+@import '~ShopUi/styles/basic';
+
+@import 'basics/reset';
+@import 'basics/typography';
+@import 'basics/grid';
+@import 'custom/custom';
+@import '~@fortawesome/fontawesome-free/css/all.css';
+@include basic-reset;
+@include basic-typography;
+@include basic-grid;
+@include basic-animation;

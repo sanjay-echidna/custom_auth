@@ -1,0 +1,83 @@
+{% extends model('component') %}
+{% import _self as component %}
+
+{% define config = {
+    name: 'quantity-counter',
+    tag: 'quantity-counter'
+} %}
+
+{% define data = {
+    isDisabled: false,
+    isReadOnly: false,
+    autoUpdate: false,
+    formattedNumberExtraClasses: '',
+    inputExtraClasses: '',
+    numberFormatConfig: {},
+} %}
+
+{% set isEditable = not data.isReadOnly and not data.isDisabled %}
+
+{% define attributes = {
+    value: 1,
+    type: "number",
+    name: "quantity",
+    onkeypress: isEditable ? null : "return false;",
+    onkeydown: isEditable ? null : "return false;",
+    min: 1,
+    step: 1,
+} %}
+
+{% block attributes %}{% endblock %}
+
+{% set inputAttributes = attributes %}
+
+{% set inputAttributeFilters = {
+    type: false,
+    value: false,
+    name: false,
+    class: false,
+} %}
+
+{% set filteredInputAttributes = inputAttributes | filter((value, key) => inputAttributeFilters[key] ?? true) %}
+
+{% set filteredInputAttributes = {
+    'data-auto-update': data.autoUpdate,
+    disabled: data.isDisabled,
+    readonly: data.isReadOnly,
+} | merge(filteredInputAttributes) %}
+
+{% set numberFormatConfig = {'watch-external-changes': true} | merge(data.numberFormatConfig) %}
+
+{% block body %}
+    <button class="{{ config.name }}__button
+                   {% if data.isDisabled or data.isReadOnly %}
+                        {{ config.name }}__button--disabled
+                   {% endif %}
+                   {{ config.jsName }}__button-decrement
+                   {{ config.name }}__button--decrement">-</button>
+
+    {% block quantityField %}
+        {% include molecule('formatted-number-input') with {
+            class: config.jsName ~ '__formatted-input ' ~ data.formattedNumberExtraClasses,
+            data: {
+                inputName: attributes.name,
+                inputValue: attributes.value,
+                inputAttributes: filteredInputAttributes,
+                inputExtraClasses: config.name ~ '__input ' ~ config.jsName ~ '__input ' ~ data.inputExtraClasses,
+                hiddenInputAttributes: {
+                    'data-qa': 'quantity-input',
+                    disabled: data.isDisabled,
+                },
+            },
+            attributes: numberFormatConfig,
+        } only %}
+
+    {% endblock %}
+
+    <button class="{{ config.name }}__button
+                   {% if data.isDisabled or data.isReadOnly %}
+                       {{ config.name }}__button--disabled
+                   {% endif %}
+                   {{ config.jsName }}__button-increment
+                   {{ config.name }}__button--increment">+</button>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends view('pdp-review-rating', '@SprykerShop:ProductReviewWidget') %}
+
+{% define data = {
+    value: _widget.productReviewStorageTransfer.averageRating | default(0),
+    maxValue: _widget.maximumRating,
+} %}
+
+{% block body %}
+	<section itemscope itemtype="http://schema.org/AggregateRating" itemprop="aggregateRating" x>
+		<meta itemprop="ratingValue" content="{{ data.value }}">
+		<meta itemprop="bestRating" content="{{ data.maxValue }}">
+		<div class="aggregaterating--pdp">
+			{% include molecule('rating-selector', 'ProductReviewWidget') with {
+            modifiers: ['pdp'],
+            data: {
+                value: data.value,
+                maxValue: data.maxValue,
+                reviewCount: _widget.productReviewStorageTransfer.reviewCount | default,
+            },
+            attributes: {
+                readonly: true,
+            },
+        } only %}
+		</div>
+	</section>
+{% endblock %}

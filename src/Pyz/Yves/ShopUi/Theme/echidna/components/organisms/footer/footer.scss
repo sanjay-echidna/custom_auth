@@ -1,0 +1,532 @@
+@mixin shop-ui-footer($name: '.footer') {
+    #{$name} {
+
+        &-main {
+            background-color: $setting-color-black;
+        }
+
+        &__subscribe {
+            @include helper-breakpoint-media-min($md) {
+                padding-top: rem(20);
+                padding-bottom: rem(32);
+            }
+
+            @include helper-breakpoint-media-min($lg) {
+                padding-top: rem(50);
+                padding-bottom: rem(50);
+            }
+
+            @include helper-breakpoint-media-min($xl) {
+                padding-top: rem(77);
+                padding-bottom: rem(77);
+            }
+        }
+
+        &__logos {
+            @include helper-breakpoint-media-min($md) {
+                background-color: $setting-color-bg;
+                padding: 0.5rem 0 0;
+                box-shadow: 0 3px 3px 0 $setting-color-shadow-1, 0 18px 18px 0 $setting-color-shadow-1;
+            }
+
+            @include helper-breakpoint-media-min($lg) {
+                padding: rem(26) 0;
+            }
+        }
+
+        &__navigation {
+            @include helper-breakpoint-media-min($md) {
+                padding-top: rem(35);
+            }
+
+            @include helper-breakpoint-media-min($lg) {
+                padding-top: rem(54);
+            }
+        }
+
+        &__contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            border-top: solid 1px $setting-color-white;
+            color: $setting-color-white;
+
+            @include helper-breakpoint-media-min($md) {
+                border-top: 0;
+            }
+
+            @include helper-breakpoint-media-min($lg) {
+                display: block;
+            }
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &__contact-info-item {
+            @include helper-effect-transition(color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: $setting-color-white;
+            font-size: rem(14);
+            font-weight: fw(medium);
+            text-align: center;
+            width: calc(50% - #{rem(10)});
+            min-height: rem(70);
+            border: solid 1px $setting-color-gray-2;
+            border-radius: $setting-border-radius;
+
+            @include helper-breakpoint-media-min($lg) {
+                display: block;
+                width: 100%;
+                min-height: 0;
+                border: none;
+                font-size: rem(15);
+                text-align: left;
+            }
+
+            @include helper-breakpoint-media-min($xl) {
+                font-size: rem(18);
+                line-height: rem(23);
+            }
+        }
+
+        &__phone {
+            @include helper-breakpoint-media-min($lg) {
+                display: block;
+                margin-bottom: 1rem;
+                color: $setting-color-white;
+            }
+
+            &:hover,
+            &:focus {
+                color: $setting-color-white;
+            }
+        }
+
+        &__social-buttons {
+            margin-top: rem(31);
+            margin-bottom: rem(23);
+            flex-direction: column-reverse;
+            color: $setting-color-white;
+
+            @include helper-breakpoint-media-min($md) {
+                margin-top: rem(42);
+                margin-bottom: rem(47);
+                flex-direction: row;
+            }
+        }
+
+        &__hint {
+            font-size: rem(13);
+            line-height: 1rem;
+            text-align: center;
+            color: $setting-color-gray-2;
+            letter-spacing: rem(0.54);
+            padding-bottom: rem(12);
+
+            @include helper-breakpoint-media-min($md) {
+                text-align: left;
+            }
+        }
+
+        &__thanks-certeo {
+            font-size: rem(13);
+            line-height: 1rem;
+            text-align: center;
+            color: $setting-color-gray-3;
+            letter-spacing: rem(0.54);
+
+            @include helper-breakpoint-media-min($md) {
+                text-align: left;
+            }
+        }
+
+        &__copyright {
+            background-color: $setting-color-white;
+            text-align: center;
+            color: $setting-color-black;
+
+            .scroll-to-top {
+                display: none;
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 9999;
+                background-color: #000;
+                color: #fff;
+                border: none;
+                border-radius: 50%;
+                padding: 10px 15px;
+                cursor: pointer;
+
+                &:hover,
+                &:focus {
+                    // background-color: $setting-scroll-top-color;
+
+                    .menu__trigger-button-icon {
+                        color: $navigation_font_color;
+                    }
+                }
+
+                .menu__trigger-button-icon {
+                    color: $setting-color-white;
+                    transform: translate(-50%, -50%) rotate(-180deg);
+                    top: 45%;
+                }
+            }
+
+            .scroll-to-top.show {
+                display: block;
+            }
+        }
+
+        @content;
+    }
+    .menu--social {
+        .menu__item--social {
+            .link--secondary {
+                color: #fff !important;
+            }
+        }
+    }
+    .footer {
+        .node--footer {
+            .link--secondary {
+                color: $setting-color-white;
+            }
+        }
+
+        .footer-logo-img {
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 4rem 15px 30px;
+
+            img {
+                width: 13%;
+                position: absolute;
+                margin-top: 2.4rem;
+            }
+        }
+
+        .footer__copyright {
+            background-color: $setting-color-gray-9;
+            color: $setting-color-black;
+        }
+
+        .footer-main {
+            background-color: $setting-color-black;
+
+            .footer__social-buttons {
+                margin-top: 0;
+
+                .navigation-icon-list {
+                    position: relative;
+                    bottom: 1.85rem;
+                }
+            }
+
+            .footer__navigation {
+                padding-top: 2.1875rem;
+
+                .js-navigation-footer-top-categories,
+                .js-navigation-footer-popular-brands {
+                    .title--footer {
+                        text-align: center;
+                        margin-left: 28px;
+                    }
+                }
+
+                .js-navigation-footer-about__trigger {
+                    text-align: center;
+                    margin-left: -5px;
+                }
+
+                .footer__contact-info {
+
+                    .info {
+                        margin-bottom: 30px;
+
+                        .question {
+                            font-size: 12px;
+                            color: $setting-color-gray-4;
+                        }
+
+                        .contact-number {
+                            font-size: 25px;
+                            color: $setting-color-white;
+                            font-weight: 600;
+                        }
+                    }
+
+                    .footer__phone {
+                        font-size: 1.5rem;
+                        color: $setting-color-white;
+                    }
+
+                    .sub-title {
+                        font-weight: 600;
+                        color: $navigation_font_color;
+                        font-size: 15px;
+                    }
+
+                    .address {
+                        font-size: 14px;
+                        line-height: 10px;
+                        color: $setting-color-white;
+                    }
+                }
+
+                .navigation-list--footer {
+                    margin-left: 40%;
+                }
+
+                .js-navigation-footer- {
+                    .navigation-list {
+                        .list--footer {
+                            .list__item {
+                                .link--footer {
+                                    color: $navigation_font_color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer__logos {
+            display: none;
+            border-bottom: 1px solid $setting-color-gray-3;
+        }
+
+        .footer__copyright,
+        .pull-right {
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0px 15px;
+
+            .copyright {
+                span {
+                    float: left;
+                    margin-bottom: 22px;
+                    margin-top: -20px;
+                }
+            }
+        }
+
+        .pull-right {
+            .paypal {
+                .paypal-options {
+                    float: right;
+                    margin-top: -22px;
+                }
+            }
+        }
+    }
+
+    .navgation-grid-left {
+        .footer__contact-info {
+            margin-top: 7rem;
+            margin-bottom: 4rem;
+
+            .footer__phone {
+                font-size: 1.5rem;
+                color: $setting-color-white;
+            }
+        }
+    }
+
+    .newsletter-contact {
+        background-color: $setting-scroll-top-color;
+    }
+
+    .footer__subscribe {
+        padding-top: 0;
+        padding-bottom: 0;
+
+        .form--inline {
+            .form__container {
+                .form__field {
+
+                    .input--expand {
+                        border-radius: 25px;
+                        background: $setting-color-white;
+                        border-bottom: none;
+                        padding-left: 2rem;
+                    }
+                }
+            }
+        }
+
+        .subscription-info {
+
+            .title--subscription {
+                font-size: 1.425rem;
+                color: $navigation_font_color;
+                position: relative;
+                top: 30px;
+            }
+
+            p.subscription-info__text.js-subscription__target.is-hidden-sm-only {
+                padding: 0 3rem;
+                bottom: 30px;
+                left: 50%;
+                font-size: 15px;
+                position: relative;
+                color: $navigation_font_color;
+            }
+        }
+
+        .js-subscription__target {
+            .text-center.text-success {
+                color: $setting-color-require;
+            }
+        }
+
+    }
+
+    .footer-logo-img1 {
+        display: none;
+    }
+
+    .title--footer {
+        color: #fff;
+
+        .hdeadphn-icon {
+            font-size: 3.5rem;
+            color: $setting-color-white;
+            margin-right: 20px;
+        }
+    }
+
+    .form--subscription {
+        .form__container {
+            .form__actions {
+
+                .button[disabled],
+                .button--disabled {
+                    background-color: transparent !important;
+                }
+            }
+        }
+    }
+
+
+    @media only screen and (max-width: 768px) {
+        .footer {
+            .footer-main {
+                .footer-logo-img {
+                    display: none;
+                }
+
+                .footer__social-buttons {
+                    .navigation-item {
+                        position: absolute;
+                        background-color: $setting-color-black;
+                    }
+                }
+
+                .footer__contact-info {
+                    margin-top: 0;
+                    margin-bottom: 0;
+
+                    .footer__phone {
+                        font-size: 0.875rem;
+                    }
+                }
+
+                .footer__social-buttons {
+                    .link--secondary {
+                        color: $setting-color-white;
+                    }
+
+                    .navigation-item {
+                        padding-bottom: 12px;
+                        .navigation-icon-list {
+                            bottom: 0;
+
+                            .menu--social {
+                                margin: 20px 0 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .newsletter-contact {
+                .footer__subscribe {
+                    .subscription {
+                        .subscription-info {
+                            margin-top: 0;
+                            margin-bottom: 0;
+
+                            .subscription-info__text {
+                                margin-top: 20px;
+                                margin-bottom: 30px;
+                                color: $navigation_font_color;
+                            }
+
+                            .title--subscription {
+                                font-size: 1.1rem;
+                                top: 0;
+                            }
+                        }
+                    }
+
+                    .form--subscription {
+                        padding-bottom: 15px;
+                    }
+                }
+            }
+
+            .pull-right {
+                .paypal {
+                    .paypal-options {
+                        // margin: 6px 4rem 16px 0;
+                        float: none;
+                    }
+                }
+            }
+
+            .footer__copyright {
+                .copyright {
+                    span {
+                        display: block;
+                        font-size: 14px;
+                        padding: 10px 4rem;
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+
+            .col.col--sm-12.col--lg-3.footer__contact-info {
+                order: 4;
+            }
+
+            .footer-logo-img1 {
+                display: block;
+                width: auto;
+                order: 4;
+                padding: 15px 4rem;
+                margin-bottom: 40px;
+                height: 72px;
+                margin-left: 84px;
+            }
+
+            .footer__logos {
+                border-bottom: none;
+                background-color: $setting-color-gray-12;
+            }
+        }
+    }
+}
+
+@include shop-ui-footer();

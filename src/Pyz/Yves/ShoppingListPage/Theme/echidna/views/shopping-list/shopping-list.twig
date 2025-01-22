@@ -1,0 +1,149 @@
+{# {% extends template('page-layout-shopping-list', 'ShoppingListPage') %}
+
+{% block breadcrumbs %}
+    {% include molecule('breadcrumb') with {
+        data: {
+            steps: [{
+                label: 'customer.account' | trans,
+            },{
+                label: 'customer.account.shopping_list' | trans,
+            }]
+        }
+    } only %}
+{% endblock %}
+
+{% define data = {
+    title: _view.shoppingListOverview.shoppingList.name,
+    shoppingList: _view.shoppingListOverview.shoppingList,
+    shoppingListCollection: _view.shoppingListOverview.shoppingLists,
+    shoppingListItems: _view.shoppingListItems,
+    addItemToCartForm: _view.addItemToCartForm,
+    numberFormatConfig: _view.numberFormatConfig,
+} %}
+
+{% set numberFormatConfig = {} %}
+{% for key, value in data.numberFormatConfig %}
+    {% set numberFormatConfig = numberFormatConfig | merge ({ (key | replace({'_symbol': '', '_': '-'})): value }) %}
+{% endfor %}
+
+{% block customerNavigation %}
+    {% widget 'CustomerNavigationWidget' args ['shoppingList', data.shoppingList.idShoppingList] only %}{% endwidget %}
+{% endblock %}
+
+{% block customerContent %}
+    <div class="grid grid--justify">
+        <div class="col col--sm-12 col--lg-auto">
+            <h1 class="title title--h2">{{ data.shoppingList.name }}</h1>
+        </div>
+        <div class="col col--sm-12 col--lg-auto">
+            {% set isListEditable = can('WriteShoppingListPermissionPlugin', data.shoppingList.idShoppingList) %}
+            {% embed molecule('table-action-list') with {
+                modifiers: ['shopping-list'],
+                data: {
+                    linkModifiers: ['tight'],
+                    items: [
+                        {
+                            url: url('shopping-list/update', { idShoppingList: data.shoppingList.idShoppingList }),
+                            icon: 'edit',
+                            title: 'page.multi_cart.shopping_cart.update.title',
+                            iconModifier: 'sm-lg-bigger',
+                            available: isListEditable,
+                        },
+                        {
+                            url: url('shopping-list/share', { idShoppingList: data.shoppingList.idShoppingList }),
+                            icon: 'share',
+                            title: 'shared_cart.form.share_button',
+                            iconModifier: 'sm-lg-bigger',
+                            available: isListEditable,
+                        },
+                        {
+                            url: path('shopping-list/print', {idShoppingList: data.shoppingList.idShoppingList}),
+                            icon: 'print',
+                            title: 'customer.account.shopping_list.overview.print',
+                            iconModifier: 'sm-lg-bigger',
+                        },
+                    ]
+                },
+                embed: {
+                    shoppingList: data.shoppingList,
+                },
+            } only %}
+                {% block body %}
+                    <div class="{{ config.name }}__inner">
+                        {{ parent() }}
+
+                        {% widget 'ShoppingListDismissWidget' args [embed.shoppingList] with {config: config} only %}
+                            {% block link %}
+                                <div class="{{ config.name }}__item">
+                                    {{ parent() }}
+                                </div>
+                            {% endblock %}
+                        {% endwidget %}
+                    </div>
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+
+    {% include molecule('shopping-list-info', 'ShoppingListPage') with {
+        modifiers: ['editable'],
+        data: {
+            shoppingList: data.shoppingList,
+        },
+    } only %}
+
+    {% if can('WriteShoppingListPermissionPlugin', data.shoppingList.idShoppingList) %}
+        {% include molecule('shopping-list-product-quick-add', 'ShoppingListPage') with {
+            class: 'spacing-bottom spacing-bottom--bigger',
+            data: {
+                activeShoppingListId: data.shoppingList.idShoppingList,
+            },
+        } only %}
+    {% endif %}
+
+    {% if data.shoppingListItems|length %}
+        {{ form_start(data.addItemToCartForm, {'action': path('shopping-list/add-to-cart')}) }}
+            <div class="grid grid--justify spacing-bottom spacing-bottom--big">
+                <div class="col col--sm-12 col--lg-auto spacing-bottom">
+                    <button type="submit" class="button button--expand-sm-lg button--hollow" {{qa('submit-button')}}>
+                        {{ 'customer.account.shopping_list.add_selected_items_to_cart' | trans }}
+                        {% include atom('icon') with {
+                            class: 'spacing-left spacing-left--small',
+                            modifiers: ['trolley'],
+                            data: {
+                                name: 'cart',
+                            },
+                        } only %}
+                    </button>
+                </div>
+                <div class="col col--sm-12 col--lg-auto text-right spacing-bottom">
+                    <button type="submit" class="button button--expand-sm-lg" name="add-all-available" value="1" {{qa('submit-button')}}>
+                        {{ 'customer.account.shopping_list.add_all_available_to_cart' | trans }}
+                        {% include atom('icon') with {
+                            class: 'spacing-left spacing-left--small',
+                            modifiers: ['trolley'],
+                            data: {
+                                name: 'cart',
+                            },
+                        } only %}
+                    </button>
+                </div>
+            </div>
+
+            <input type="hidden" value="{{ data.shoppingList.idShoppingList }}" name="idShoppingList"/>
+
+            {% include molecule('shopping-list-table', 'ShoppingListPage') with {
+                class: 'table table--expand',
+                data: {
+                    shoppingList: data.shoppingList,
+                    shoppingListItems: data.shoppingListItems,
+                    numberFormatConfig: numberFormatConfig,
+                },
+            } only %}
+        {{ form(data.addItemToCartForm) }}
+    {% else %}
+        {{ 'customer.account.shopping_list.empty' | trans }}
+    {% endif %}
+
+    {% widget 'ShoppingListSubtotalWidget' args [data.shoppingListItems] only %}{% endwidget %}
+{% endblock %} #}

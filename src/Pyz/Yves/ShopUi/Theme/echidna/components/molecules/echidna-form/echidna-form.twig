@@ -1,0 +1,29 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'echidna-form',
+    tag: 'echidna-form'
+} %}
+
+{% define data = {
+    name: required,
+    description: 'no description'
+} %}
+
+{% define attributes = {
+    'element-selector': required
+} %}
+
+{% block body %}
+	
+	{% block counter %}
+		
+		<strong class=""></strong>
+		
+	{% endblock %}
+
+{% endblock %}
+
+{% block cart %}
+<span id="val-cart"></span>
+{% endblock %}

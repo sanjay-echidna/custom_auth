@@ -1,0 +1,161 @@
+@mixin product-detail-page-product-configurator($name: '.product-detail') {
+    #{$name} {
+        padding: rem(47) 0 0;
+
+        @include helper-breakpoint-media-min($lg) {
+            padding: rem(43) 0 rem(100);
+        }
+
+        &__title {
+            font-weight: fw(medium);
+            line-height: normal;
+            color: $setting-color-gray-5;
+            margin-bottom: 17px;
+        }
+
+        &__description {
+            font-size: rem(16);
+            font-weight: fw(regular);
+            line-height: rem(29);
+            color: $setting-color-gray-3;
+            padding-bottom: rem(35);
+
+            @include helper-breakpoint-media-min($lg) {
+                padding-bottom: 0;
+            }
+        }
+
+        &__detail-list {
+            border-radius: $setting-border-radius;
+            background-color: $setting-color-white;
+            padding: 0 rem(10) rem(23) rem(20);
+            margin-bottom: rem(40);
+
+            @include helper-breakpoint-media-min($xl) {
+                padding: rem(4) rem(40) rem(36);
+                margin-bottom: 0;
+            }
+
+            &-item {
+                &:nth-child(odd) {
+                    padding-right: 5px;
+                }
+
+                &:nth-child(even) {
+                    padding-left: 5px;
+                }
+            }
+
+            &-key {
+                font-size: rem(14);
+                font-weight: fw(bold);
+                line-height: normal;
+                color: $setting-color-gray-5;
+                padding-top: rem(23);
+
+                @include helper-breakpoint-media-min($xl) {
+                    font-size: rem(16);
+                    padding-top: rem(31);
+                }
+            }
+
+            &-value {
+                font-size: rem(13);
+                font-weight: fw(regular);
+                line-height: normal;
+                color: $setting-color-gray-3;
+
+                @include helper-breakpoint-media-min($xl) {
+                    font-size: rem(15);
+                }
+            }
+        }
+
+        @content;
+    }
+
+    .product-info-tab {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #d3d3d3;
+        cursor: pointer;
+        font-size: 1.3rem;
+        @include helper-breakpoint-media-max($lg) {
+            font-size: 1rem;
+        }
+        @include helper-breakpoint-media-max($md) {
+            font-size: 0.75rem;
+        }
+    }
+    .product-info-content {
+        padding: 30px 30px 20px;
+        text-align: left;
+        width: 100%;
+        float: left;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        -moz-border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -ms-border-radius: 15px;
+        -o-border-radius: 15px;
+        margin-top: 1px;
+        .product-info-pane {
+            display: none;
+        }
+        .product-info-pane.active {
+            display: block;
+        }
+    }
+    .product-info-tab.product-detail__title {
+        background-color: $setting-color-white;
+        margin-bottom: 0;
+        padding-bottom: 15px;
+        position: relative;
+    }
+    .product-info-tab.product-detail__title.active {
+        &:before {
+            content: '';
+            opacity: 1;
+            visibility: visible;
+            bottom: -3px;
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #fc0;
+            left: 0;
+            transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            -o-transition: all 0.3s;
+        }
+    }
+    .product-detail__title {
+        &:hover {
+            &:before {
+                content: '';
+                opacity: 1;
+                visibility: visible;
+                bottom: -3px;
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                background-color: #fc0;
+                left: 0;
+                transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                -webkit-transition: all 0.3s;
+                -o-transition: all 0.3s;
+            }
+        }
+    }
+    .product-info-tabs {
+        margin-left: 15px;
+    }
+    .result {
+        position: absolute;
+        left: 0 !important;
+        z-index: 9;
+    }
+}
+
+@include product-detail-page-product-configurator;

@@ -1,0 +1,49 @@
+@include shopping-list-page-shopping-list-info() {
+    padding: rem(20);
+    background-color: $setting-color-gray-7;
+    border-radius: $setting-border-radius;
+    margin: rem(10) 0 rem(24);
+    color: $setting-color-gray-3;
+    font-size: rem(14);
+
+    &--editable {
+        margin-top: 0;
+        padding-top: rem(10);
+
+        @include helper-breakpoint-media-min($lg) {
+            margin-top: rem(10);
+            padding-top: rem(20);
+        }
+    }
+
+    &__title {
+        color: $setting-color-gray-5;
+        font-size: rem(12);
+        text-transform: uppercase;
+        margin-right: 0.5rem;
+        vertical-align: middle;
+    }
+}
+
+.shopping-list-info,
+.product-quick-add-form,
+.subtotal-price {
+    background-color: $setting-color-white;
+    border: 1px solid $setting-color-gray-6;
+}
+
+.quantity-counter {
+    background: $setting-color-white;
+}
+
+.quantity-counter__button:hover {
+    background: $button-setting-color-main;
+}
+
+.product-card-item__available {
+    color: $setting-color-black;
+}
+
+.subtotal-price.spacing.spacing--inner.spacing-bottom.spacing-bottom--big {
+    background-color: $setting-color-white;
+}

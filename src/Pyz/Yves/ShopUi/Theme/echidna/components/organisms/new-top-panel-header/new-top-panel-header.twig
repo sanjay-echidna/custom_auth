@@ -1,0 +1,12 @@
+{% extends model('component') %}
+
+
+{% define config = {
+    name: 'new-top-panel-header',
+    tags:'new-top-panel-header'
+} %}
+
+
+{% block body %}
+    {% embed molecule('new-panel-info-item') %}{% endembed %}
+{% endblock %}

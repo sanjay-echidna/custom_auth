@@ -1,0 +1,117 @@
+{% extends template('page-layout-checkout', '@SprykerShop:CheckoutPage') %}
+
+{% block header %}
+    {% embed organism('header') with {
+        modifiers: ['checkout'],
+        data: {
+            showSearchForm: false,
+            showNavigation: false,
+        },
+        embed: {
+            cart: cart | default,
+            backUrl: data.backUrl,
+        },
+    } only %}
+        {% block headerMainContent %}
+            <div class="container">
+                <div class="grid grid--middle grid--nowrap grid--gap-smaller">
+                    <div class="col col--sm-4">
+                        {% macro backToCart(className) %}
+                            <a href="{{ url('cart') }}" class="{{ className }}__back">
+                                {% include atom('icon') with {
+                                    class: 'is-hidden-lg-xxl spacing-right spacing-right--small',
+                                    modifiers: ['small', 'reverse'],
+                                    data: {
+                                        name: 'chevron-right',
+                                    },
+                                } only %}
+                                {{ 'checkout.back_button' | trans }}
+                            </a>
+                        {% endmacro %}
+
+                        {% if embed.cart %}
+                            {% set QuoteRequestActionsWidget = findWidget('QuoteRequestActionsWidget', [embed.cart, embed.backUrl]) %}
+                            {% if QuoteRequestActionsWidget and QuoteRequestActionsWidget.isVisible %}
+                                {% widget QuoteRequestActionsWidget with {
+                                    embed: {
+                                        className: config.name,
+                                    },
+                                } only %}
+                                    {% block backButton %}{% endblock %}
+
+                                    {% block cancelButton %}
+                                        {% set buttonCancelClass = embed.className ~ '__back' %}
+                                        {{ parent() }}
+                                    {% endblock %}
+
+                                    {% block saveButton %}{% endblock %}
+                                {% endwidget %}
+                            {% elseif embed.cart.quoteRequestReference is not defined or embed.cart.quoteRequestReference is null %}
+                                {{ _self.backToCart(config.name) }}
+                            {% endif %}
+                        {% else %}
+                            {{ _self.backToCart(config.name) }}
+                        {% endif %}
+                    </div>
+
+                    {% include molecule('logo') with {
+                        modifiers: ['checkout'],
+                        class: 'col col--sm-4 text-center',
+                    } only %}
+
+                    <div class="col col--sm-4">
+                        <div class="grid">
+                            <div class="col col--right">
+                                <div class="{{ config.name }}__checkout-secure">
+                                    {% include atom('icon') with {
+                                        data: {
+                                            name: 'lock',
+                                        },
+                                    } only %}
+                                    <span
+                                        class="{{ config.name }}__checkout-secure-text">{{ 'checkout.secure' | trans }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block pageInfo %}
+    <div class="page-info page-info--checkout">
+        <div class="container">
+            {% block breadcrumbs %}
+                {% include view('cart-checkout-breadcrumb', 'CheckoutWidget') with {
+                    modifiers: ['checkout'],
+                    data: {
+                        isCartPage: false,
+                        checkoutBreadcrumbs: data.breadcrumbs,
+                    },
+                } only %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}{% endblock %}
+
+{% block contentClass %}page-layout-main page-layout-main--checkout-page{% endblock %}
+
+{% block contentWrap %}
+    <div class="container {% block containerClass %}container--checkout{% endblock %}">
+        {% if data.title is not empty %}
+            <h1 class="title title--checkout">
+                {% if data.stepNumder is defined and data.breadcrumbs | length > 1 %}
+
+                {% endif %}
+                {{ data.title }}
+            </h1>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}
+

@@ -1,0 +1,77 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-item-variant-selector',
+} %}
+
+{% define data = {
+    productItem: required,
+    canEdit: required,
+    productItemAttributes: [],
+} %}
+
+{% block component %}
+    {% if data.productItemAttributes is not empty %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% set cartProductMeasurementUnitQuantitySelectorWidget = findWidget('CartProductMeasurementUnitQuantitySelectorWidget', [data.productItem]) %}
+    {% set isProductSalesUnit = false %}
+
+    {% if cartProductMeasurementUnitQuantitySelectorWidget %}
+        {% set isProductSalesUnit = cartProductMeasurementUnitQuantitySelectorWidget.quantitySalesUnit.idProductMeasurementSalesUnit is defined
+            or cartProductMeasurementUnitQuantitySelectorWidget.parameters.itemTransfer.amountSalesUnit is not null %}
+    {% endif %}
+
+    <form method="POST" action="{{ path('cart/update', {'sku': data.productItem.sku }) }}">
+        <ul class="list spacing-y">
+            {% for attributeName, attributeOptions in data.productItemAttributes %}
+                {% set options = [] %}
+
+                {% for value, properties in attributeOptions %}
+                    {% set options = options | merge([{
+                        label: value,
+                        value: value,
+                        selected: attribute(properties, 'selected') ? true : false,
+                        disabled: attribute(properties, 'available') ? false : true
+                    }]) %}
+                {% endfor %}
+
+                <li class="list__item spacing-y">
+                    <label class="grid grid--middle">
+                        <div class="col">
+                            <span class="{{ config.name }}__label">{{ ('product.attribute.' ~ attributeName) | trans }}:</span>
+                        </div>
+                        <div class="col col--expand {{ config.name }}__select">
+                            {% include molecule('custom-select') with {
+                                modifiers: ['small', 'mobile-expand', 'mobile-xs'],
+                                data: {
+                                    label: ('product.attribute.' ~ attributeName) | trans,
+                                    options: options
+                                },
+                                attributes: {
+                                    name: 'preselectedAttributes[' ~ attributeName ~ ']',
+                                    disabled: not data.canEdit or isProductSalesUnit,
+                                    'data-form-submitter': true,
+                                    'config-theme': 'small',
+                                },
+                            } only %}
+                        </div>
+                    </label>
+                    <input name="selectedAttributes[{{ attributeName }}]" type="hidden" />
+                </li>
+            {% endfor %}
+        </ul>
+
+        <input type="hidden" value="{{ data.productItem.groupKey }}" name="groupKey" />
+        <input type="hidden" value="{{ data.productItem.quantity }}" name="quantity" />
+
+        {% if data.productItem.productOptions is not empty %}
+            {% for productOption in data.productItem.productOptions %}
+                <input name="product-option[{{ productOption.groupName }}]" type="hidden" value="{{ productOption.idProductOptionValue }}" />
+            {% endfor %}
+        {% endif %}
+    </form>
+{% endblock %}

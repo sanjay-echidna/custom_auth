@@ -391,6 +391,20 @@
             </groups>
         </pages>
     </users>
+    <second-factor-auth>
+        <label>2FA</label>
+        <title>Second Factor Authentication</title>
+        <icon>fa-shield</icon>
+        <pages>
+            <registration>
+                <label>Registration</label>
+                <title>Registration</title>
+                <bundle>second-factor-auth</bundle>
+                <controller>registration</controller>
+                <action>index</action>
+            </registration>
+        </pages>
+    </second-factor-auth>
     <app-catalog-gui>
         <label>Apps</label>
         <title>Apps</title>

@@ -1,0 +1,144 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'footer',
+    tag: 'footer'
+} %}
+
+{% block body %}
+
+	<div class="newsletter-contact">
+		{% block subscribe %}
+			<div class="container {{ config.name }}__subscribe">
+				{{ render(path('newsletter/subscribe')) }}
+			</div>
+		{% endblock %}
+	</div>
+
+	{% block logos %}
+		<div class="{{ config.name }}__logos">
+			{% block logosInner %}
+				{% set categoryPaymentProviders = 'PAYMENT_PROVIDERS' %}
+
+				{% include molecule('toggler-accordion') with {
+                    attributes: {
+                        'wrap-class-name': config.jsName ~ '-' ~ categoryPaymentProviders,
+                        'trigger-class-name': config.jsName ~ '-' ~ categoryPaymentProviders ~ '__trigger',
+                        'class-to-toggle': 'is-hidden-sm-only',
+                    },
+                } only %}
+			{% endblock %}
+		</div>
+	{% endblock %}
+
+	<div class="footer-main">
+
+		<div class="footer-logo-img">
+			<a href="/" class="logo__link logo__link--main">
+				<img src="{{ publicPath('images/echidna-logo.png')}}" style="background-color: #000;" title="Logo">
+			</a>
+		</div>
+
+		{% block navigation %}
+			<div class="container">
+				<div class="grid grid--gap navgation-grid-left">
+
+					<div class="col col--sm-12 col--lg-3 {{ config.name }}__contact-info">
+
+						<div class="footer-logo-img1">
+							<img src="{{ publicPath('images/echidna-logo.png')}}" style="background-color: #000;" title="Logo">
+						</div>
+
+						<h5 class="title title--footer">{{ 'global.contact_us' | trans }}</h5>
+
+						{% set phoneNumberTranslation = 'global.phone.number' | trans %}
+
+						<a class="{{ config.name }}__contact-info-item {{ config.name }}__phone" href="tel:{{ phoneNumberTranslation }}">
+							{% include atom('icon') with {
+                            modifiers: ['contact'],
+                            data: {
+                                name: 'cell-phone',
+                            },
+                        } only %}
+							{{ phoneNumberTranslation }}
+						</a>
+
+						{% set emailTranslation = 'global.email.text' | trans %}
+
+						<a class="{{ config.name }}__contact-info-item" href="mailto:{{ emailTranslation }}">
+							{% include atom('icon') with {
+                            modifiers: ['contact'],
+                            data: {
+                                name: 'email',
+                            },
+                        } only %}
+							{{ emailTranslation }}
+						</a>
+
+					</div>
+
+					<div class="col col--sm-12 col--lg-9">
+						{% block navigationInner %}
+							{% include molecule('navigation-footer') with {
+                            class: 'grid grid--gap navgation-grid-left',
+                            data: {
+                                items: [
+                                    {
+                                        category: 'FOOTER_NAVIGATION_TOP_CATEGORIES',
+                                        title: 'global.top_categories' | trans,
+                                    },
+                                    {
+                                        category: 'FOOTER_NAVIGATION_POPULAR_BRANDS',
+                                        title: 'global.popular_brands' | trans,
+                                    },
+                                    {
+                                        category: 'FOOTER_NAVIGATION',
+                                        title: 'global.about' | trans,
+                                    },
+                                ],
+                            },
+                        } only %}
+						{% endblock %}
+					</div>
+
+				</div>
+
+
+				{% block social %}
+					<div class="grid grid--gap grid--middle {{ config.name }}__social-buttons">
+
+						{% block socialLinks %}
+							{% include molecule('navigation-footer-item') with {
+                            modifiers: ['social'],
+                            class: 'col col--sm-12 col--md-5 col--lg-3',
+                            data: {
+                                category: 'SOCIAL_LINKS',
+                                template: 'navigation-social',
+                            },
+                        } only %}
+						{% endblock %}
+					</div>
+				{% endblock %}
+			</div>
+		{% endblock %}
+	</div>
+
+	{% block copyright %}
+		<div class="{{ config.name }}__copyright">
+			<div class="col col--lg-6 col--md-6 col-sm-6 col--xs-6 pull-left">
+				<small class="copyright">
+					<span>Copyright {{ 'now' | date('Y') }} | All Rights Reserved.</span>
+				</small>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
+				<a href="#" class="paypal">
+					<img class="paypal-options" src="{{ publicPath('images/paypal.png')}}" title="Paypal icon">
+				</a>
+			</div>
+			<button id="scroll-to-top" class="scroll-to-top">
+				<i class="fas fa-chevron-up"></i>
+			</button>
+		</div>
+	{% endblock %}
+{% endblock %}
+

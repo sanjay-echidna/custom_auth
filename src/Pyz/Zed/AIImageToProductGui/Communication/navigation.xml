@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <ai-image-to-product-gui>
+        <label>AI Image To Product Gui</label>
+        <title>AI Image To Product Gui</title>
+        <bundle>ai-image-to-product-gui</bundle>
+        <controller>index</controller>
+        <action>index</action>
+    </ai-image-to-product-gui>
+</config>

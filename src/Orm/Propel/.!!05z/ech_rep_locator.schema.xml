@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          name="zed"
+          xsi:noNamespaceSchemaLocation="https://static.spryker.com/schema-01.xsd"
+          namespace="Orm\Zed\RepLocator\Persistence" package="src.Orm.Zed.RepLocator.Persistence">
+    <table name="ech_rep_locator" idMethod="native" allowPkInsert="true" phpName="EchRepLocator">
+        <column name="id" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="name" required="true" type="VARCHAR" size="255"/>
+        <column name="contactno" required="true" type="VARCHAR" size="11"/>
+        <column name="email" required="true" type="VARCHAR" size="255"/>
+        <column name="street" required="true" type="VARCHAR" size="255"/>
+        <column name="city" required="true" type="VARCHAR" size="255"/>
+        <column name="region" required="true" type="VARCHAR" size="255"/>
+        <column name="country" required="true" type="VARCHAR" size="255"/>
+        <column name="zipcode" required="true" type="VARCHAR" size="255"/>
+        <column name="longitude" required="true" type="VARCHAR" size="255"/>
+        <column name="latitude" required="true" type="VARCHAR" size="255"/>
+        <column name="image" required="true" type="VARCHAR" size="255"/>
+        <id-method-parameter value="ech_replocator_pk_seq"/>
+    </table>
+</database>

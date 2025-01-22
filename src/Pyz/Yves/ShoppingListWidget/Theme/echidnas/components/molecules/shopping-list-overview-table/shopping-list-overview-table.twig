@@ -1,0 +1,110 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'shopping-list-overview-table',
+} %}
+
+{% define data = {
+    shoppingLists: required,
+    idShoppingList: null,
+    shoppingListForm: null,
+    shoppingListResponse: null
+} %}
+
+{% block body %}
+    <table class="table table--grid table--expand table--responsive spacing-bottom spacing-bottom--biggest">
+        <thead>
+            <tr>
+                {% if data.enableTableForm %}<th></th>{% endif %}
+                <th>{{ 'customer.account.shopping_list.overview.name' | trans }}</th>
+                <th>{{ 'customer.account.shopping_list.overview.owner' | trans }}</th>
+                <th>{{ 'customer.account.shopping_list.overview.created_date' | trans }}</th>
+                <th>{{ 'customer.account.shopping_list.access' | trans }}</th>
+                <th>{{ 'customer.account.shopping_list.overview.item_count' | trans }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for shoppingList in data.shoppingLists %}
+            {% set hasWritePermission = can('WriteShoppingListPermissionPlugin', shoppingList.idShoppingList) %}
+            <tr>
+                {% if data.enableTableForm %}
+                    <td class="transform-cell transform-cell--no-label spacing-top spacing-top--inner spacing-top--big">
+                        {% include atom('checkbox') with {
+                            attributes: {
+                                name: 'shoppingLists[]',
+                                value: shoppingList.idShoppingList,
+                            },
+                        } only %}
+                    </td>
+                {% endif %}
+                <td class="transform-cell spacing-top spacing-top--inner spacing-top--big" data-content="{{ 'customer.account.shopping_list.overview.name' | trans }}">
+                    <a class="title title--link spacing spacing--reset" href="{{ path('shopping-list/details', { idShoppingList: shoppingList.idShoppingList }) }}">{{ shoppingList.name }}</a>
+                </td>
+                <td class="transform-cell" data-content="{{ 'customer.account.shopping_list.overview.owner' | trans }}">{{ shoppingList.owner }}</td>
+                <td class="transform-cell" data-content="{{ 'customer.account.shopping_list.overview.created_date' | trans }}">{{ shoppingList.createdAt | formatDate }}</td>
+                <td class="transform-cell" data-content="{{ 'customer.account.shopping_list.access' | trans }}">
+                    {% include molecule('shopping-list-permission', 'ShoppingListPage') with {
+                        data: {
+                            hasWritePermission: hasWritePermission
+                        }
+                    } only %}
+                </td>
+                <td class="transform-cell spacing-bottom spacing-bottom--inner spacing-bottom--big" data-content="{{ 'customer.account.shopping_list.overview.item_count' | trans }}">
+                    <span class="badge badge--shopping-list">
+                        {{ shoppingList.numberOfItems | default(0) | executeFilterIfExists('formatInt', app.locale) }}
+                        {{ 'checkout.step.summary.items' | trans }}
+                    </span>
+                </td>
+                <td class="spacing spacing--inner spacing--reset">
+                    {% embed molecule('table-action-list') with {
+                        data: {
+                            linkModifiers: ['tight'],
+                            items: [
+                                {
+                                    url: url('shopping-list/update', { idShoppingList: shoppingList.idShoppingList }),
+                                    icon: 'edit',
+                                    title: 'general.edit.button',
+                                    available: hasWritePermission
+                                },
+                                {
+                                    url: url('shopping-list/share', { idShoppingList: shoppingList.idShoppingList }),
+                                    icon: 'share',
+                                    title: 'customer.account.shopping_list.overview.share',
+                                    iconModifier: 'share',
+                                    available: hasWritePermission
+                                },
+                                {
+                                    url: url('shopping-list/print', { idShoppingList: shoppingList.idShoppingList }),
+                                    icon: 'print',
+                                    title: 'customer.account.shopping_list.overview.print'
+                                },
+                                {
+                                    url: url('shopping-list/delete/confirm', { idShoppingList: shoppingList.idShoppingList }),
+                                    icon: 'delete',
+                                    title: 'customer.account.shopping_list.overview.delete',
+                                    available: hasWritePermission
+                                }
+                            ]
+                        },
+                        embed: {
+                            shoppingList: shoppingList
+                        }
+                    } only %}
+                        {% block body %}
+                            {{ parent() }}
+                            {% widget 'ShoppingListDismissWidget' args [embed.shoppingList] with {config: config} only %}
+                                {% block link %}
+                                    <div class="{{ config.name }}__item">
+                                        {{ parent() }}
+                                    </div>
+                                {% endblock %}
+                            {% endwidget %}
+                        {% endblock %}
+                    {% endembed %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

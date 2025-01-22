@@ -1,0 +1,152 @@
+@mixin shop-ui-new-top-panel-header($name: '.new-top-panel-header') {
+    #{$name} {
+        white-space: nowrap;
+
+        &__actions {
+            @include helper-breakpoint-media-min($xl) {
+                max-width: calc(100% - 350px);
+            }
+        }
+
+        &__action-item {
+            border-right: solid rem(1) $setting-color-gray-2;
+            position: relative;
+            z-index: $setting-zi-element + 4;
+            color: $setting-color-gray-8;
+
+            @include helper-breakpoint-media-min($lg) {
+                border-right: 0px;
+            }
+
+            &:hover .list--company-user {
+                transform: scale(1);
+            }
+
+            &--tel {
+                font-size: rem(12);
+                font-weight: fw(bold);
+                line-height: rem(40);
+                padding-right: rem(31);
+            }
+
+            .custom-select--alternative {
+                .custom-select__select {
+                    @include helper-breakpoint-media-max($lg) {
+                        background-color: $setting-color-transparent;
+                        border: 0;
+                    }
+                }
+            }
+        }
+
+        &__company {
+            @include helper-effect-transition(color);
+            font-size: rem(11);
+            font-weight: fw(bold);
+            letter-spacing: rem(0.6);
+            line-height: rem(40);
+            color: $setting-color-gray-4;
+            padding: 0 rem(30) 0 rem(18);
+            height: 100%;
+            text-transform: uppercase;
+            white-space: nowrap;
+            max-width: rem(150);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            position: relative;
+
+            @include helper-breakpoint-media-min($xl) {
+                max-width: rem(365);
+            }
+
+            &:hover {
+                color: helper-color-light($setting-color-gray-4, 25);
+            }
+
+            .is-touch & {
+                pointer-events: none;
+            }
+
+            &--no-menu {
+                cursor: default;
+
+                &:hover {
+                    color: $setting-color-gray-4;
+                }
+            }
+        }
+
+        &__company-icon {
+            width: rem(7);
+            height: rem(4);
+            margin: 0 rem(-5) 0 rem(5);
+            position: absolute;
+            top: calc(50% - #{rem(2)});
+            right: rem(17);
+        }
+
+        .store-right {
+            .navigation-top__actions {
+                justify-content: end;
+
+                @include helper-breakpoint-media-max($lg) {
+                    justify-content: normal;
+                }
+            }
+        }
+
+        .contact-left {
+            .navigation-top__actions {
+                justify-content: start;
+
+                @include helper-breakpoint-media-max($xl) {
+                    justify-content: end;
+                }
+            }
+        }
+
+        .navigation-top__actions {
+            max-width: 100%;
+            display: flex;
+            flex-direction: row;
+            //align-items: center;
+            //justify-content: center;
+            width: 100%;
+            //flex-wrap: wrap;
+            background: $setting-color-white;
+
+            li {
+                border-radius: 0;
+                border: none;
+                color: $setting-color-gray-4;
+                background: none;
+                font-size: 0.6875rem;
+                line-height: 2.5rem;
+                font-weight: 700;
+                letter-spacing: 0.0375rem;
+
+                @include helper-breakpoint-media-min($xl) {
+                    padding: 0 1.875rem 0 1.125rem;
+                }
+
+                a {
+                    color: $setting-color-gray-4;
+                }
+            }
+
+            @include helper-breakpoint-media-min($xl) {
+                padding: 0 1.875rem 0 1.125rem;
+            }
+        }
+
+        .toppanel {
+            border-top: 1px solid;
+            border-color: $setting-color-gray-9;
+        }
+
+        @content;
+    }
+
+}
+
+@include shop-ui-new-top-panel-header();

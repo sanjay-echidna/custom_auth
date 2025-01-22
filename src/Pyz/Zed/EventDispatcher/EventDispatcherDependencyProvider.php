@@ -33,6 +33,7 @@ use Spryker\Zed\Session\Communication\Plugin\EventDispatcher\SaveSessionEventDis
 use Spryker\Zed\Session\Communication\Plugin\EventDispatcher\SessionEventDispatcherPlugin;
 use Spryker\Zed\Twig\Communication\Plugin\EventDispatcher\TwigEventDispatcherPlugin;
 use Spryker\Zed\ZedRequest\Communication\Plugin\EventDispatcher\GatewayControllerEventDispatcherPlugin;
+use SprykerUFirst\Zed\SecondFactorAuth\Communication\Plugin\EventDispatcher\SecondFactorAuthorizationEventDispatcherPlugin;
 
 class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependencyProvider
 {
@@ -65,6 +66,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new EnvironmentInfoHeaderEventDispatcherPlugin(),
             new SecurityBlockerBackofficeUserEventDispatcherPlugin(),
             new GatewayControllerEventDispatcherPlugin(),
+            new SecondFactorAuthorizationEventDispatcherPlugin()
         ];
 
         if (class_exists(ProfilerRequestEventDispatcherPlugin::class)) {
@@ -102,6 +104,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new RedirectUrlValidationEventDispatcherPlugin(),
             new EnvironmentInfoHeaderEventDispatcherPlugin(),
             new SecurityBlockerBackofficeUserEventDispatcherPlugin(),
+            new SecondFactorAuthorizationEventDispatcherPlugin()
         ];
 
         if (class_exists(ProfilerRequestEventDispatcherPlugin::class)) {

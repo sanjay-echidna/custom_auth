@@ -1,0 +1,324 @@
+$color_1: #444;
+$color_2: #000;
+$color_3: #4c4c4c;
+$color_4: #666;
+$color_5: #999;
+$color_6: #333;
+$color_7: #fff;
+$color_8: #fc0;
+$font-family_1: sans-serif;
+$font-family_2: arial;
+$background-color_1: #fff;
+$background-color_2: #eee;
+$background-color_3: #f4f4f4;
+$background-color_4: #e4e4e4;
+$background-color_5: #fc0;
+$background-color_6: gray;
+$border-top-color_1: transparent;
+$border-bottom-color_1: #aaa;
+$border-bottom-color_2: transparent;
+
+// .page-layout-main--cms-page{background-image: url("/assets/static/images/main_bg.jpg");}
+// body{background: url("/assets/static/images/bg_footer.png") 0 bottom repeat-x;}
+.support-page {
+    .support-page-content {
+        text-align: center;
+        background-color: #eee;
+        border-right: 1px solid #fff;
+        border-bottom: 1px solid #fff;
+        padding: 15px 0;
+    }
+}
+
+.content-text {
+    a {
+        background-position: center;
+        display: inline-block;
+        background: no-repeat;
+        margin: 0 auto;
+        padding: 51% 3% 0;
+        font-size: 1.143em;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .navIc4_1 {
+        background-image: url('/assets/static/images/contact_160x160_yellow.png') !important;
+        background-position: center;
+
+        &:hover {
+            background-image: url('/assets/static/images/contact_160x160.png') !important;
+            background-position: center;
+        }
+    }
+
+    .navIc4_2 {
+        background-image: url('/assets/static/images/Master_cut_website_icon_160x160-FAQ.png') !important;
+        background-position: center;
+
+        &:hover {
+            background-image: url('/assets/static/images/Master_cut_website_icon_160x160-FAQ_Grey.png') !important;
+            background-position: center;
+        }
+    }
+
+    .navIc4_3 {
+        background-image: url('/assets/static/images/reference_160x160_yellow.png') !important;
+        background-position: center;
+
+        &:hover {
+            background-image: url('/assets/static/images/reference_160x160.png') !important;
+            background-position: center;
+        }
+    }
+
+    .navIc4_4 {
+        background-image: url('/assets/static/images/trainings_160x160_yellow.png') !important;
+        background-position: center;
+
+        &:hover {
+            background-image: url('/assets/static/images/trainings_160x160.png') !important;
+            background-position: center;
+        }
+    }
+
+    .navIc4_5 {
+        background-image: url('/assets/static/images/catalogs_160x160_yellow.png') !important;
+        background-position: center;
+
+        &:hover {
+            background-image: url('/assets/static/images/catalogs_160x160.png') !important;
+            background-position: center;
+        }
+    }
+
+    .navIc4_6 {
+        background-image: url('/assets/static/images/img_icon_software_yellow.png') !important;
+        background-position: center;
+
+        &:hover {
+            background-image: url('/assets/static/images/img_icon_software.png') !important;
+            background-position: center;
+        }
+    }
+
+    .navIc4_7 {
+        background-image: url('/assets/static/images/cad_160x160_yellow.png') !important;
+        background-position: center;
+
+        &:hover {
+            background-image: url('/assets/static/images/cad_160x160.png') !important;
+            background-position: center;
+        }
+    }
+}
+
+.navIc4_2.activeactive {
+    background-image: url('/assets/static/images/Master_cut_website_icon_160x160-FAQ_Grey.png') !important;
+    background-position: center;
+}
+
+.navIc4_3.activeactive {
+    background-image: url('/assets/static/images/reference_160x160.png') !important;
+    background-position: center;
+}
+
+.navIc4_4.activeactive {
+    background-image: url('/assets/static/images/trainings_160x160.png') !important;
+    background-position: center;
+}
+
+.navIc4_5.activeactive {
+    background-image: url('/assets/static/images/catalogs_160x160.png') !important;
+    background-position: center;
+}
+
+.navIc4_6.activeactive {
+    background-image: url('/assets/static/images/img_icon_software.png') !important;
+    background-position: center;
+}
+
+.contact-us {
+    .contact-us-form {
+        .btn-success {
+            background-color: #eb553c;
+            border-color: #eb553c;
+            border-radius: 25px;
+        }
+    }
+}
+
+.section {
+    .section__title--secondary {
+        color: $setting-color-gray-4;
+        text-align: left;
+        position: relative;
+        border-bottom: 1px solid $setting-color-gray-10;
+        padding-bottom: 5px;
+
+        &:before {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 2px;
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            background-color: $border-bottom-extra-color_1;
+        }
+    }
+}
+
+.is-hidden-sm-md-lg-xl-xxl-xxxl {
+    display: none;
+}
+
+.nomargin {
+    margin: 0px;
+}
+
+
+.page-layout-main--catalog-page {
+    .grid--column-mob-reverse {
+        @include helper-breakpoint-media-max($lg) {
+            background-color: $short_background-color;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .sort {
+            @include helper-breakpoint-media-max($lg) {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.page-layout-main.page-layout-main--pdp {
+    @include helper-breakpoint-media-max($lg) {
+        margin-bottom: 15px;
+
+        .page-layout-main__pdp-gallery {
+            background-color: $setting-color-white;
+        }
+
+        .product-configurator__top-block {
+            background-color: $setting-color-white;
+        }
+    }
+}
+
+.section.section--secondary.section--full-width.spacing-top.spacing-top--inner.spacing-top--big {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.input {
+    border-radius: $setting-border-radius-3;
+}
+
+.product-configurator {
+    .form--inline {
+        .form__actions {
+            .form__action {
+                border-radius: 0 $setting-border-radius-3 $setting-border-radius-3 0;
+            }
+        }
+    }
+}
+
+.product-configurator {
+    .form--inline {
+        .form__actions {
+            .form__action {
+                border-radius: 0 $setting-border-radius-3 $setting-border-radius-3 0;
+            }
+        }
+    }
+}
+
+.product-item__actions {
+    .product-item__actions-row {
+        a {
+            border-color: $button-setting-color-main;
+            color: $setting-color-white;
+            background-color: $button-setting-color-main;
+
+            &:hover,
+            &:focus {
+                border-color: $button-setting-color-main-hover;
+                background-color: $button-setting-color-main-hover;
+            }
+        }
+    }
+}
+
+.banner--small {
+    .button--hollow-second {
+        border-color: $button-setting-color-main;
+        color: $setting-color-white;
+        background-color: $button-setting-color-main;
+
+        &:hover,
+        &:focus {
+            border-color: $button-setting-color-main-hover;
+            background-color: $button-setting-color-main-hover;
+        }
+    }
+}
+
+.cart-summary {
+    .spacing-y {
+        .button {
+            border-color: $setting-color-secondary-text-color;
+            background-color: $setting-color-secondary-text-color;
+            color: $setting-color-white;
+        }
+
+        &:hover,
+        &:focus {
+            border-color: #fff;
+            background-color: #fff;
+        }
+    }
+}
+
+.product-card-item__col--shopping-list {
+    .product-card-item__inner {
+        .product-card-item__inner--actions {
+            .button--shopping-list {
+                border-color: $button-setting-color-main;
+                color: $setting-color-white;
+                background-color: $button-setting-color-main;
+
+                &:hover,
+                &:focus {
+                    border-color: $button-setting-color-main-hover;
+                    background-color: $button-setting-color-main-hover;
+                }
+            }
+        }
+    }
+}
+
+.cart-sidebar-item {
+    .cart-sidebar-item__start {
+        .form--discount-voucher {
+            .form__container {
+                .form__actions {
+                    .button.form__action.button.button--hollow-icon {
+                        border-color: $button-setting-color-main;
+                        color: $setting-color-white;
+                        background-color: $button-setting-color-main;
+
+                        &:hover,
+                        &:focus {
+                            border-color: $button-setting-color-main-hover;
+                            background-color: $button-setting-color-main-hover;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

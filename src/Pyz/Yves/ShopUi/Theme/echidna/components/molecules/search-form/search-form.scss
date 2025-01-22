@@ -1,0 +1,82 @@
+@mixin shop-ui-search-form($name: '.search-form') {
+	#{$name} {
+		@include helper-visibility-invisible;
+		@include helper-effect-transition(transform visibility opacity);
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		transform: translateY(-100%);
+
+		&--main-search {
+			z-index: $setting-zi-header + 1;
+
+			@include helper-breakpoint-media-min($lg) {
+				@include helper-visibility-visible;
+				display: block;
+				position: relative;
+				transform: none;
+				transition: none;
+				z-index: $setting-zi-element;
+			}
+
+			.body-overlay--no-search & {
+				z-index: $setting-zi-search-suggestions;
+			}
+		}
+
+		&--active {
+			@include helper-visibility-visible;
+			transform: translateY(0);
+		}
+
+		&__button {
+			position: absolute;
+			top: 0;
+			width: rem(43);
+			height: 100%;
+			padding: 0;
+			border: none;
+			background: $setting-color-transparent;
+			color: $setting-color-gray-4;
+			z-index: $setting-zi-search-suggestions + 3;
+
+			@include helper-breakpoint-media-min($lg) {
+				width: rem(56);
+			}
+
+			&--submit {
+				right: 0;
+				background-color: $button-setting-color-main;
+				color: $setting-color-white;
+				border-radius: 0px $setting-border-radius-3 $setting-border-radius-3
+					0px;
+				@include helper-breakpoint-media-max($lg) {
+					left: 0;
+					border-radius: $setting-border-radius-3 0px 0px
+						$setting-border-radius-3;
+				}
+			}
+
+			&--close {
+				right: 0;
+
+				@include helper-breakpoint-media-min($lg) {
+					display: none;
+				}
+			}
+
+			&:hover {
+				background: $button-setting-color-main-hover;
+
+				.icon {
+					color: $setting-color-white;
+				}
+			}
+		}
+
+		@content;
+	}
+}
+
+@include shop-ui-search-form;

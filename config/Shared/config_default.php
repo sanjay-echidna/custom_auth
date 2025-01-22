@@ -130,6 +130,9 @@ use Spryker\Zed\Propel\PropelConfig;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
 use Symfony\Component\HttpFoundation\Cookie;
+use Pyz\Shared\SnapFind\SnapFindConstants;
+use TurbineKreuzberg\Shared\Sentry\SentryConstants;
+use SprykerUFirst\Shared\SecondFactorAuth\SecondFactorAuthConstants;
 
 // ############################################################################
 // ############################## PRODUCTION CONFIGURATION ####################
@@ -156,6 +159,9 @@ $config[KernelConstants::CORE_NAMESPACES] = [
     'SprykerEco',
     'Spryker',
     'SprykerSdk',
+    'Echidna',
+    'Nos',
+    'SprykerUFirst',
 ];
 
 // >>> ROUTER
@@ -746,6 +752,7 @@ $sprykerGlueBackendPort = (int)(getenv('SPRYKER_GLUE_BACKEND_PORT')) ?: 443;
 $config[GlueBackendApiApplicationConstants::GLUE_BACKEND_API_HOST] = $sprykerGlueBackendHost;
 $config[GlueBackendApiApplicationConstants::PROJECT_NAMESPACES] = [
     'Pyz',
+    'TurbineKreuzberg',
 ];
 $config[GlueBackendApiApplicationConstants::GLUE_BACKEND_CORS_ALLOW_ORIGIN] = getenv('SPRYKER_GLUE_APPLICATION_CORS_ALLOW_ORIGIN') ?: '*';
 
@@ -891,3 +898,19 @@ $config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_ACP]
 $config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_MESSAGE_BROKER] = 'aop-event-platform';
 
 $config[AppCatalogGuiConstants::OAUTH_OPTION_AUDIENCE] = 'aop-atrs';
+
+// ----------------------------------------------------------------------------
+// ---------------------------- SNAP FIND -------------------------------------
+// ----------------------------------------------------------------------------
+
+$config[SnapFindConstants::GEMINI_API_KEY] = 'AIzaSyA8PUYjaeM1h7d8v_2pInc5EKXZtzZoxQQ';
+//getenv('GEMINI_API_KEY');
+$config[SnapFindConstants::GEMINI_HOST_ENDPOINT] = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
+//getenv('GEMINI_HOST_ENDPOINT');
+
+// $config[KernelConstants::CORE_NAMESPACES] = [
+//     // add 'Nos' as a core namespace
+//     'Nos',
+// ];
+$config[SecondFactorAuthConstants::SECOND_FACTOR_AUTH_REQUIRED] = true;
+$config[SecondFactorAuthConstants::SHOW_SECOND_FACTOR_AUTH_RESET] = true;

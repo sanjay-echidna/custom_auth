@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Console;
 
+use Nos\Yves\TwigCodeSniffer\Plugin\Console\TwigCodeSnifferConsole;
 use Pyz\Zed\DataImport\DataImportConfig;
 use Pyz\Zed\Development\Communication\Console\AcceptanceCodeTestConsole;
 use Pyz\Zed\Development\Communication\Console\ApiCodeTestConsole;
@@ -15,6 +16,11 @@ use SecurityChecker\Command\SecurityCheckerCommand;
 use Spryker\Zed\BusinessOnBehalfDataImport\BusinessOnBehalfDataImportConfig;
 use Spryker\Zed\Cache\Communication\Console\EmptyAllCachesConsole;
 use Spryker\Zed\CategoryDataImport\CategoryDataImportConfig;
+use Spryker\Zed\CodeGenerator\Communication\Console\BundleClientCodeGeneratorConsole;
+use Spryker\Zed\CodeGenerator\Communication\Console\BundleCodeGeneratorConsole;
+use Spryker\Zed\CodeGenerator\Communication\Console\BundleSharedCodeGeneratorConsole;
+use Spryker\Zed\CodeGenerator\Communication\Console\BundleYvesCodeGeneratorConsole;
+use Spryker\Zed\CodeGenerator\Communication\Console\BundleZedCodeGeneratorConsole;
 use Spryker\Zed\CompanyBusinessUnitDataImport\CompanyBusinessUnitDataImportConfig;
 use Spryker\Zed\CompanyDataImport\CompanyDataImportConfig;
 use Spryker\Zed\CompanyUnitAddressDataImport\CompanyUnitAddressDataImportConfig;
@@ -386,6 +392,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
             new DateTimeProductConfiguratorBuildFrontendConsole(),
             new OrderMatrixConsole(),
+            new TwigCodeSnifferConsole(),
         ];
 
         $propelCommands = $container->getLocator()->propel()->facade()->getConsoleCommands();
@@ -439,6 +446,14 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             $commands[] = new MessageBrokerAwsSnsTopicsCreatorConsole();
             $commands[] = new MessageBrokerSqsToSnsSubscriberConsole();
         }
+
+
+        $commands[] = new BundleCodeGeneratorConsole();
+        $commands[] = new BundleYvesCodeGeneratorConsole();
+        $commands[] = new BundleZedCodeGeneratorConsole();
+        $commands[] = new BundleClientCodeGeneratorConsole();
+        $commands[] = new BundleSharedCodeGeneratorConsole();
+
 
         return $commands;
     }

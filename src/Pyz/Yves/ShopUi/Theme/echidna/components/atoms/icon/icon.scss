@@ -1,0 +1,399 @@
+$shop-ui-icon-size-big: 1.25rem;
+$shop-ui-icon-size-bigger: 1.5rem;
+
+@include shop-ui-icon {
+    z-index: $setting-zi-icon;
+
+    &--logo {
+        width: rem(96);
+        height: rem(32);
+        max-width: 100%;
+
+        @include helper-breakpoint-media-min($lg) {
+            width: rem(175);
+            height: rem(70);
+        }
+
+        @include helper-breakpoint-media-min($xl) {
+            width: rem(195);
+        }
+    }
+
+    &--checkout {
+        width: rem(109);
+        height: rem(32);
+
+        @include helper-breakpoint-media-min($lg) {
+            width: rem(167);
+            height: rem(60);
+        }
+    }
+
+    &--header-check {
+        width: rem(12);
+        height: rem(9);
+        margin: rem(-2) rem(9) 0 0;
+    }
+
+    &--progress-check {
+        width: rem(7);
+        height: rem(5);
+
+        @include helper-breakpoint-media-min($md) {
+            width: rem(10);
+            height: rem(8);
+        }
+    }
+
+    &--phone {
+        width: rem(15);
+        height: rem(15);
+        margin-right: rem(6);
+    }
+
+    &--search {
+        width: rem(20);
+        height: rem(20);
+        fill: $setting-color-white;
+        stroke: $setting-color-white;
+        stroke-width: rem(0.5);
+    }
+
+    &--user {
+        width: rem(18);
+        height: rem(21);
+        margin-top: rem(7);
+    }
+
+    &--quick-order {
+        width: rem(21);
+        height: rem(15);
+
+        @include helper-breakpoint-media-min($lg) {
+            width: rem(32);
+            height: rem(19);
+            margin-top: rem(10);
+        }
+    }
+
+    &--quick-order-delete-row {
+        width: rem(14);
+        height: rem(15);
+        fill: $setting-color-gray-2;
+    }
+
+    &--header-shopping-list {
+        width: rem(13);
+        height: rem(12);
+
+        @include helper-breakpoint-media-min($lg) {
+            width: rem(17);
+            height: rem(16);
+            margin-top: rem(10);
+        }
+    }
+
+    &--cart {
+        width: rem(20);
+        height: rem(17);
+
+        @include helper-breakpoint-media-min($lg) {
+            width: rem(30);
+            height: rem(26);
+            margin-top: rem(5);
+        }
+    }
+
+    &--contact {
+        width: rem(22);
+        height: rem(24);
+        margin-bottom: rem(8);
+
+        @include helper-breakpoint-media-min($lg) {
+            display: none;
+        }
+    }
+
+    &--cross {
+        width: rem(10);
+        height: rem(10);
+    }
+
+    &--reverse {
+        transform: rotate(180deg);
+    }
+
+    &--toggler-cross {
+        position: relative;
+        width: rem(10);
+        height: rem(10);
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            background-color: $setting-color-gray-5;
+        }
+
+        &::before {
+            height: rem(2);
+            width: 100%;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+
+            @include helper-breakpoint-media-min($lg) {
+                height: rem(3);
+            }
+        }
+
+        &::after {
+            height: 100%;
+            width: rem(2);
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+
+            @include helper-breakpoint-media-min($lg) {
+                width: rem(3);
+            }
+        }
+
+        .active & {
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    &--toggler-cross-thin {
+        &::before {
+            height: rem(2);
+        }
+
+        &::after {
+            width: rem(2);
+        }
+    }
+
+    &--cart-plus {
+        display: inline-block;
+        width: rem(26);
+        height: rem(23);
+        margin: rem(-6) rem(12) rem(-2) 0;
+    }
+
+    &--toggler-cross-link {
+        &::before,
+        &::after {
+            background-color: $setting-color-gray-3;
+        }
+    }
+
+    &--link {
+        @include helper-effect-transition(color);
+        color: $setting-color-gray-2;
+        margin-right: rem(6);
+    }
+
+    &--hermes-logo,
+    &--dhl-logo {
+        width: rem(73);
+    }
+
+    &--invoice-logo {
+        width: rem(52);
+        height: rem(20);
+
+        @include helper-breakpoint-media-min($lg) {
+            width: rem(83);
+            height: rem(28);
+        }
+    }
+
+    &--invoice-logo-small {
+        width: rem(55);
+        height: rem(22);
+    }
+
+    &--payment-logo {
+        position: absolute;
+        top: rem(27);
+        right: rem(20);
+
+        @include helper-breakpoint-media-min($lg) {
+            top: rem(27);
+            right: rem(30);
+        }
+    }
+
+    &--summary-shipping {
+        width: rem(53);
+    }
+
+    &--overview {
+        width: rem(17);
+        height: rem(16);
+    }
+
+    &--users {
+        width: rem(29);
+        height: rem(19);
+    }
+
+    &--business-unit {
+        width: rem(22);
+        height: rem(22);
+    }
+
+    &--role {
+        height: rem(14);
+    }
+
+    &--plus-small {
+        width: rem(10);
+        height: rem(10);
+        position: relative;
+        top: rem(-1);
+    }
+
+    &--share {
+        width: rem(20);
+    }
+
+    &--add-to-list {
+        position: relative;
+        top: rem(1);
+        width: rem(26);
+        height: rem(26);
+    }
+
+    &--success {
+        width: rem(120);
+        height: rem(120);
+        margin-bottom: rem(-22);
+    }
+
+    &--footer {
+        height: rem(28);
+        width: rem(93);
+    }
+
+    &--invoice-logo-footer {
+        width: rem(73);
+    }
+
+    &--pay-pal-logo-footer {
+        width: rem(64);
+    }
+
+    &--klarna-logo-footer {
+        width: rem(68);
+    }
+
+    &--dhl-logo-footer {
+        width: rem(76);
+    }
+
+    &--copyright {
+        width: rem(106);
+        height: rem(48);
+    }
+
+    &--view-mode-switch {
+        @include helper-breakpoint-media-min($lg) {
+            margin-right: rem(9);
+        }
+    }
+
+    &--reset {
+        @include helper-effect-transition(color);
+        margin-right: rem(8);
+        color: $setting-color-gray-5;
+    }
+
+    &--chevron {
+        width: rem(10);
+        height: rem(10);
+    }
+
+    &--create-list {
+        vertical-align: bottom;
+        height: rem(18);
+        width: rem(18);
+    }
+
+    &--create-new-cart {
+        width: rem(24);
+        height: rem(18);
+        vertical-align: bottom;
+    }
+
+    &--trolley {
+        width: rem(20);
+    }
+
+    &--title {
+        width: rem(35);
+        height: rem(26);
+    }
+
+    &--sm-lg-regular {
+        width: rem(16);
+        height: rem(16);
+
+        @include helper-breakpoint-media-min($lg) {
+            width: rem(20);
+            height: rem(20);
+        }
+    }
+
+    &--sm-lg-bigger {
+        width: rem(16);
+        height: rem(16);
+
+        @include helper-breakpoint-media-min($lg) {
+            width: rem(24);
+            height: rem(24);
+        }
+    }
+
+    &--browse-file {
+        width: rem(28);
+        height: rem(28);
+    }
+
+    &--download-file {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: rem(30);
+        height: rem(30);
+    }
+
+    &--remove-file {
+        @include helper-effect-transition(color);
+        margin: rem(-2) 0 0 rem(5);
+        cursor: pointer;
+
+        &:hover {
+            color: $setting-color-gray-4;
+        }
+    }
+
+    &--clock {
+        width: rem(12);
+        height: rem(12);
+    }
+
+    &--message {
+        width: rem(22);
+        height: rem(20);
+    }
+
+    &--cart-locked {
+        width: rem(30);
+        height: rem(23);
+        color: $setting-color-alt;
+    }
+}

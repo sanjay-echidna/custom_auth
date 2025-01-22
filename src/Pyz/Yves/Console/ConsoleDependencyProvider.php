@@ -13,6 +13,8 @@ use Spryker\Yves\Monitoring\Plugin\Console\MonitoringConsolePlugin;
 use Spryker\Yves\Router\Plugin\Application\RouterApplicationPlugin;
 use Spryker\Yves\Router\Plugin\Console\RouterCacheWarmUpConsole;
 use Spryker\Yves\Router\Plugin\Console\RouterDebugYvesConsole;
+// use Nos\Yves\TwigCodeSniffer\Plugin\Console\TwigCodeSnifferConsole;
+use Pyz\Yves\ContentProductSetWidget\Plugin\TestPluginConsole as ContentProductSetWidgetTestPluginConsole;
 
 class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 {
@@ -26,6 +28,8 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
         return [
             new RouterDebugYvesConsole(),
             new RouterCacheWarmUpConsole(),
+            // new TwigCodeSnifferConsole(),
+            // new ContentProductSetWidgetTestPluginConsole()
         ];
     }
 

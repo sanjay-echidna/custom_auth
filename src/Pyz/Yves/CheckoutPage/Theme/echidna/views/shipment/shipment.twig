@@ -1,0 +1,160 @@
+{% extends view('shipment', '@SprykerShop:CheckoutPage') %}
+
+{% define data = {
+    stepNumder: 2,
+} %}
+
+{% block header %}
+    {% set cart = data.forms.shipment.vars.data %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% embed molecule('form') with {
+        modifiers: ['checkout-form'],
+        data: {
+            form: data.forms.shipment,
+            cart: data.forms.shipment.vars.data,
+            backUrl: data.backUrl,
+            submit: {
+                enable: true,
+                text: 'checkout.step.payment' | trans,
+                class: 'form__action--expand-sm-md button button--big',
+            },
+            cancel: {
+                enable: true,
+                url: data.backUrl,
+                text: 'general.back.button' | trans,
+                icon: '',
+                class: 'form__action--expand-sm-md button button--big button--hollow-icon button--back',
+            },
+        },
+    } only %}
+        {% block fieldset %}
+            {% set shipmentGroupCollectionForm = data.form.shipmentGroups | default %}
+
+            <div class="grid">
+                {% for shipmentGroupForm in shipmentGroupCollectionForm %}
+                    {% if shipmentGroupForm.hash is defined %}
+                        {% do shipmentGroupForm.hash.setRendered %}
+                    {% endif %}
+
+                    <article class="col col--sm-12 grid grid--gap spacing-bottom spacing-bottom--big">
+                        <h3 class="col col--sm-12 title title--second spacing-bottom spacing-bottom--small">
+                            {{ 'page.checkout.shipment.shipment_group_heading' | trans({
+                                '%current%': loop.index | executeFilterIfExists('formatInt', app.locale),
+                                '%total%': loop.length | executeFilterIfExists('formatInt', app.locale)
+                            }) }}
+                        </h3>
+
+                        <div class="col col--sm-12 col--xl-8">
+                            {% for item in shipmentGroupForm.vars.data.cartItems %}
+                                {% set cartItem = item.bundleProduct ?? item %}
+
+                                {% embed molecule('product-card-item') with {
+                                    modifiers: ['checkout'],
+                                    data: {
+                                        listItem: cartItem,
+                                        quantity: cartItem.quantity,
+                                        priceModifiers: ['medium', 'block', 'margin-bottom-from-tablet'],
+                                    },
+                                    embed: {
+                                        bundleItems: item.bundleItems | default([]),
+                                    },
+                                } only %}
+                                    {% block image %}
+                                        {% set imageUrl = data.listItem.images is not empty ? data.listItem.images[0].externalUrlLarge : null %}
+
+                                        {% include molecule('product-item-image') with {
+                                            modifiers: ['small'],
+                                            data: {
+                                                name: data.listItem.name,
+                                                image: imageUrl,
+                                            },
+                                        } only %}
+                                    {% endblock %}
+
+                                    {% block title %}
+                                        <h6 class="{{ config.name }}__title spacing spacing--reset">{{ data.listItem.name }}</h6>
+                                    {% endblock %}
+
+                                    {% block productConfiguration %}
+                                        {% widget 'ProductConfigurationCartItemDisplayWidget' args [data.listItem] only %}
+                                            {% block status %}{% endblock %}
+                                        {% endwidget %}
+                                    {% endblock %}
+
+                                    {% block subQuantity %}
+                                        {% if data.listItem.quantitySalesUnit is not empty %}
+                                            {% include atom('quantity-option') with {
+                                                data: {
+                                                    value: data.listItem.quantitySalesUnit.value,
+                                                    precision: data.listItem.quantitySalesUnit.precision,
+                                                    optionName: data.listItem.quantitySalesUnit.productMeasurementUnit.name | trans,
+                                                },
+                                            } only %}
+                                        {% endif %}
+                                    {% endblock %}
+
+                                    {% block bundle %}
+                                        {% include molecule('bundle-items', 'ProductBundleWidget') ignore missing with {
+                                            data: {
+                                                items: embed.bundleItems,
+                                            },
+                                        } only %}
+                                    {% endblock %}
+
+                                    {% block note %}
+                                        {% if data.listItem.cartNote is not empty %}
+                                            {% include molecule('cart-item-note', 'CartNoteWidget') ignore missing with {
+                                                data: {
+                                                    isNoteNotEmpty: true,
+                                                    canWrite: false,
+                                                    label: 'cart_note.checkout_page.quote_note',
+                                                    note: data.listItem.cartNote,
+                                                },
+                                            } only %}
+                                        {% endif %}
+                                    {% endblock %}
+
+                                    {% block price %}
+                                        {% set price = data.listItem.sumSubtotalAggregation is defined ? data.listItem.sumSubtotalAggregation : data.listItem.price %}
+                                        {% set originalAmount = data.listItem.prices.ORIGINAL ?? null %}
+
+                                        {% include molecule('money-price') with {
+                                            modifiers: data.priceModifiers,
+                                            data: {
+                                                amount: price,
+                                                originalAmount: originalAmount,
+                                                currencyIsoCode: data.currencyIsoCode,
+                                            },
+                                        } only %}
+                                    {% endblock %}
+                                {% endembed %}
+                            {% endfor %}
+                        </div>
+
+                        <div class="col col--sm-12 col--xl-4">
+                            {% include molecule('shipment-sidebar', 'CheckoutPage') with {
+                                data: {
+                                    shipment: shipmentGroupForm.shipment,
+                                },
+                            } only %}
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% endblock %}
+
+        {% block actions %}
+            {% set QuoteRequestActionsWidget = findWidget('QuoteRequestActionsWidget', [data.cart, data.backUrl]) %}
+            {% if QuoteRequestActionsWidget and QuoteRequestActionsWidget.isVisible %}
+                {% widget QuoteRequestActionsWidget only %}
+                    {% block cancelButton %}{% endblock %}
+                {% endwidget %}
+            {% else %}
+                {{ parent() }}
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

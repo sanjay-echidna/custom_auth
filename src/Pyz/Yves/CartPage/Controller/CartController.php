@@ -36,7 +36,7 @@ class CartController extends SprykerCartController
         $viewData['products'] = $this->getFactory()
             ->createCartItemsProductsProvider()
             ->getItemsProducts($cartItems, $this->getLocale());
-
+            // dd($viewData);
         return $viewData;
     }
 

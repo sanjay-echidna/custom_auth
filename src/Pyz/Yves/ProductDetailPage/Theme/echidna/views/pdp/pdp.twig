@@ -1,0 +1,125 @@
+{% extends view('pdp', '@SprykerShop:ProductDetailPage') %}
+
+{% block title %}
+	<h1 itemprop="name" class="is-hidden-sm-md-lg-xl-xxl-xxxl title--h3">
+		{% widget 'ProductAbstractLabelWidget' args [data.product.idProductAbstract] only %}
+		{% block body %}
+			{% include molecule('label-group', 'ProductLabelWidget') with {
+                    modifiers: ['pdp'],
+                    data: {
+                        labels: labels
+                    }
+                } only %}
+		{% endblock %}
+		{% endwidget %}
+		{{ data.product.name }}
+	</h1>
+	<link itemprop="url" href="{{ data.productUrl }}"/>
+{% endblock %}
+
+{% block contentClass %}page-layout-main page-layout-main--pdp
+{% endblock %}
+
+{% block content %}
+	<section itemscope itemtype="https://schema.org/Product">
+		<meta itemprop="name" content="{{ data.product.name }}">
+		<meta itemprop="url" content="{{ data.hostName }}{{ data.productUrl }}">
+		<meta itemprop="sku" content="{{ data.product.sku }}">
+		<meta itemprop="productId" content="{{ data.product.sku }}">
+		<meta itemprop="description" content="{{ data.product.metaDescription }}">
+
+		{% if data.product.images.0.externalUrlLarge is defined %}
+			<meta itemprop="image" content="{{ data.product.images.0.externalUrlLarge }}">
+		{% endif %}
+
+		{% if data.product.attributes.brand is defined %}
+			<div itemprop="brand" itemscope itemtype="https://schema.org/Brand">
+				<meta itemprop="name" content="{{ data.product.attributes.brand }}">
+			</div>
+		{% endif %}
+
+		{% widget 'ProductSchemaOrgCategoryWidget' args [data.product] only %}{% endwidget %}
+
+		{% if data.product.attributes.upcs is defined %}
+			<meta itemprop="gtin12" content="{{ data.product.attributes.upcs }}">
+		{% endif %}
+
+		<meta itemprop="inProductGroupWithID" content="{{ data.product.idProductAbstract }}">
+
+		<div class="grid grid--gap grid--justify">
+			<div class="page-layout-main__pdp-gallery">
+				{% widget 'ProductAbstractLabelWidget' args [data.product.idProductAbstract] only %}
+				{% block body %}
+					{% include molecule('label-group', 'ProductLabelWidget') with {
+                    modifiers: ['pdp'],
+                    data: {
+                        labels: labels
+                    }
+                } only %}
+				{% endblock %}
+				{% endwidget %}
+				{% include molecule('image-gallery', 'ProductImageWidget') ignore missing with {
+                    data: {
+                        idProductAbstract: data.product.idProductAbstract,
+                        images: data.product.images
+                    }
+                } only %}
+			</div>
+
+			<div class="col col--sm-12 col--lg-5">
+				{% include molecule('product-configurator', 'ProductDetailPage') with {
+                    data: {
+                        product: data.product,
+                    },
+                } only %}
+
+			</div>
+
+		</div>
+
+		{% widget 'ProductAlternativeListWidget' args [data.product] only %}{% endwidget %}
+
+		<div class="js-pdp-section">
+			{% include molecule('product-detail', 'ProductDetailPage') with {
+                data: {
+                    description: data.product.description,
+                    attributes: data.product.attributes,
+                    product:data.product
+                }
+            } only %}
+		</div>
+
+		{% include molecule('toggler-accordion') with {
+            attributes: {
+                'wrap-class-name': 'js-pdp-section',
+                'trigger-class-name': 'js-pdp-section__trigger',
+                'class-to-toggle': 'is-hidden-sm-md',
+            },
+        } only %}
+
+		{# {% include molecule('product-details-ajax-options') %} #}
+
+
+		{% widget 'ProductReplacementForListWidget' args [data.product.sku] only %}{% endwidget %}
+
+		{% widget 'SimilarProductsWidget' args [data.product] only %}{% endwidget %}
+
+		{% if data.product.ProductSetIds is not empty %}
+			{% widget 'ProductSetIdsWidget' args [data.product.ProductSetIds, data.request] only %}{% endwidget %}
+		{% endif %}
+	</section>
+{% endblock %}
+
+{% block contentBottom %}
+	{% embed molecule('product-cms-block', 'CmsBlockWidget') ignore missing with {
+        data: {
+            idProductAbstract: data.product.idProductAbstract,
+        }
+    } only %}
+		{% block body %}
+			{% cms_slot 'slt-9' required ['idProductAbstract'] with {
+                idProductAbstract: data.idProductAbstract,
+            } %}
+		{% endblock %}
+	{% endembed %}
+{% endblock %}

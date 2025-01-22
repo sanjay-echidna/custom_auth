@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="SearchForm">
+        <property name="SnapFindTestString" type="string"/>
+        <property name="SnapFindTestInt" type="int"/>
+    </transfer>
+
+    <transfer name="SnapFindCollection">
+        <property name="SnapFindTestCollection" type="SearchForm[]" singular="snapFind"/>
+    </transfer>
+
+    <transfer name="SnapFindCriteria">
+        <property name="idSnapFind" type="int"/>
+        <property name="SnapFindTestString" type="string"/>
+        <property name="SnapFindTestInt" type="int"/>
+        <property name="withTest" type="bool"/>
+    </transfer>
+
+    <transfer name="SnapFindRequest">
+        <property name="idSnapFind" type="int"/>
+        <property name="SnapFindTestString" type="string"/>
+        <property name="SnapFindTestInt" type="int"/>
+    </transfer>
+
+    <transfer name="SnapFindResponse">
+        <property name="idSnapFind" type="int"/>
+        <property name="SnapFindTestString" type="string"/>
+        <property name="SnapFindTestInt" type="int"/>
+    </transfer>
+
+    <transfer name="SearchQueryByImage">
+        <property name="success" type="bool"/>
+        <property name="redisImageKey" type="string"/>
+        <property name="queryString" type="string"/>
+    </transfer>
+</transfers>

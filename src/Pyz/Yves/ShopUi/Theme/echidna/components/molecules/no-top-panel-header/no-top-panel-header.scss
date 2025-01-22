@@ -1,0 +1,18 @@
+/*!
+ * Copyright (c) 2023.
+ * Chandan Kumar <chandan.k@echidnaic.com>
+ */
+
+header {
+  .header__main {
+    min-height: 7.125rem;
+    padding: 2rem;
+  }
+
+  @media only screen and (max-width: 500px) {
+    header .header__main {
+      min-height: 4.125rem;
+      padding: 0.6rem 0 0 0;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{% extends template('page-layout-main') %}
+{% define data = {
+    activePage: 'test',
+    message: _view.message,
+    form: _view.form,
+} %}
+{% block content %}
+    <div>        {{ data.message }}    </div>
+    <div class="box">
+        {% include molecule('form') with {
+            data: {
+                title: 'Search via SearchForm!' | trans,
+                form: data.form,
+                submit: {
+                    enable: true
+                },
+            }
+        } only %}
+    </div>
+{% endblock %}

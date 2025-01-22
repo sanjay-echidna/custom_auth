@@ -1,0 +1,41 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'camera-modal',
+    tag: 'camera-modal'
+} %}
+
+{% block body %}
+
+    <div id="modal-1" style="display: none;" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="closeBtn" id="closeBtn">X</span>
+                <h2>Upload your picture</h2>
+            </div>
+            <div class="modal-body">
+                <div id="loader" style="display: none;" class="loader-overlay">
+                    <div class="loader"></div>
+                </div>
+                <div id="modal-1-content">
+                    <div class="video-container">
+                        <video id="camera" autoplay></video>
+                    </div>
+                    <canvas id="canvas" style="display: none;"></canvas>
+                    <div>
+                        <button id="captureBtn" class="button button--hollow button--expand-sm-only spacing-top spacing-top--big" type="button">Capture Image</button>
+                    </div>
+                    <div class="image-preview-container">
+                        <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 100%; max-height: 200px;"/>
+                    </div>
+                    <form name="image_upload_form" method="post" enctype="multipart/form-data">
+                        <input id="image_upload_form_image" name="image_upload_form[image]" required class="input input--expand" type="file" accept="image/*">
+                        <input type="hidden" name="_token_snap_find" value="{{ csrf_token('snap-find')}}">
+                        <button id="uploadBtn" class="button button--hollow button--expand-sm-only spacing-top spacing-top--big" type="button">Upload Image</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

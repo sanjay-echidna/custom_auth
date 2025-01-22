@@ -1,0 +1,19 @@
+<?php
+
+namespace Orm\Zed\SecondFactorAuth\Persistence;
+
+use Orm\Zed\SecondFactorAuth\Persistence\Base\SpyUfgSecondFactorAuthTrustedDevice as BaseSpyUfgSecondFactorAuthTrustedDevice;
+
+/**
+ * Skeleton subclass for representing a row from the 'spy_ufg_second_factor_auth_trusted_device' table.
+ *
+ *
+ *
+ * You should add additional methods to this class to meet the
+ * application requirements.  This class will only be generated as
+ * long as it does not already exist in the output directory.
+ */
+class SpyUfgSecondFactorAuthTrustedDevice extends BaseSpyUfgSecondFactorAuthTrustedDevice
+{
+
+}

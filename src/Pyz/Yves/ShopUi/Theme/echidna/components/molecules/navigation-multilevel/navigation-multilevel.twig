@@ -1,0 +1,33 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'navigation-multilevel',
+    tag: 'navigation-multilevel',
+} %}
+
+{% define data = {
+    nodes: [],
+} %}
+
+{% define attributes = {
+    'class-to-toggle': required,
+    'available-breakpoint': '0',
+    'overlay-block-class-name': 'js-overlay-block',
+    'reverse-class-name': 'menu-wrapper--reverse',
+} %}
+
+{% block body %}
+    <ul class="menu menu--lvl-0">
+        {% for node in data.nodes %}
+            {% set hasChildren = node.children | length > 0 %}
+            
+            {% include molecule('navigation-multilevel-node') with {
+                class: 'menu__item menu__item--lvl-0 ' ~ (hasChildren ? 'menu__item--has-children-dropdown' : ''),
+                data: {
+                    node: node,
+                    parentJsName: config.jsName,
+                },
+            } only %}
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -7,6 +7,10 @@
 
 namespace Pyz\Yves\Router;
 
+use Echidna\Yves\ContactUs\Plugin\Router\ContactUsRouteProviderPlugin;
+use Echidna\Yves\HtmlSitemap\Plugin\Router\HtmlSitemapRouteProviderPlugin;
+use Echidna\Yves\ProductCompare\Plugin\Router\ProductCompareRouteProviderPlugin;
+use Echidna\Yves\RepLocator\Plugin\Router\RepLocatorRouteProviderPlugin;
 use Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin;
 use Pyz\Yves\MultiCartPage\Plugin\Router\MultiCartPageRouteProviderPlugin;
 use Spryker\Yves\HealthCheck\Plugin\Router\HealthCheckRouteProviderPlugin;
@@ -80,6 +84,8 @@ use SprykerShop\Yves\ShoppingListPage\Plugin\Router\ShoppingListPageRouteProvide
 use SprykerShop\Yves\ShoppingListWidget\Plugin\Router\ShoppingListWidgetAsyncRouteProviderPlugin;
 use SprykerShop\Yves\ShoppingListWidget\Plugin\Router\ShoppingListWidgetRouteProviderPlugin;
 use SprykerShop\Yves\StorageRouter\Plugin\Router\StorageRouterPlugin;
+use Pyz\Yves\SnapFind\Plugin\Router\SnapFindRouteProviderPlugin;
+use Pyz\Yves\CustomAuth\Plugin\Router\CustomAuthPageRouteProviderPlugin;
 
 class RouterDependencyProvider extends SprykerRouterDependencyProvider
 {
@@ -166,6 +172,12 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new MultiCartPageAsyncRouteProviderPlugin(),
             new OrderCustomReferenceWidgetAsyncRouteProviderPlugin(),
             new ShoppingListWidgetAsyncRouteProviderPlugin(),
+            new RepLocatorRouteProviderPlugin(), #RepLocator
+            new ContactUsRouteProviderPlugin(), #Contact Us
+            new ProductCompareRouteProviderPlugin(), #Addtocomapre
+            new HtmlSitemapRouteProviderPlugin(), #SitemapHtml
+            new SnapFindRouteProviderPlugin(),
+            new CustomAuthPageRouteProviderPlugin(),
         ];
     }
 

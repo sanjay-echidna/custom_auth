@@ -1,0 +1,47 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'search-form'
+} %}
+
+{% define data = {
+    searchUrl: path('search'),
+    searchValue: app.request.get('q')
+} %}
+
+{% define attributes = {
+    'data-search-id': required
+} %}
+
+{% block body %}
+    <form action="{{data.searchUrl}}">
+        <input name="q" type="text" class="input input--expand suggest-search__input {{ config.jsName }}__input--{{ attributes['data-search-id'] }}" placeholder="{{ 'global.search' | trans }}" value="{{data.searchValue}}" autocomplete="off">
+        <button type="submit" class=" button button--expand {{config.name}}__button {{config.name}}__button--submit">
+            {% include atom('icon') with {
+                modifiers: ['search'],
+                data: {
+                    name: 'search'
+                }
+            } only %}
+        </button>
+
+
+        <button class="button button--expand {{config.name}}__button {{config.name}}__button--close {% block close %}{% endblock %}">
+            {% include atom('icon') with {
+                modifiers: ['small'],
+                data: {
+                    name: 'cross'
+                }
+            } only %}
+        </button>
+
+        {% include molecule('suggest-search') with {
+            attributes: {
+                'suggestion-url': path('search/suggestion'),
+                'base-suggest-url': path('search/suggestion'),
+                'input-class-name': config.jsName ~ '__input--' ~ attributes['data-search-id'],
+                'overlay-breakpoint': '768',
+            },
+        } only %}
+    </form>
+{% endblock %}

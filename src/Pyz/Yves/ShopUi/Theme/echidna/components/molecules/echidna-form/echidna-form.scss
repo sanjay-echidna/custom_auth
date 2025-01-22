@@ -1,0 +1,50 @@
+.form__action--link {
+    background-color: $button-setting-color-main;
+    border-color: $button-setting-color-main;
+    width: auto;
+    padding: 0.8rem 2rem;
+    border-radius: 22px;
+    color: $setting-color-white;
+    font-weight: 500;
+}
+
+.form__action--link:hover {
+    background-color: $button-setting-color-main-hover;
+}
+
+.form__actions {
+    .link--action {
+        color: $setting-color-white;
+    }
+}
+
+.link--action:hover {
+    text-decoration: none;
+}
+
+.form__action.button.button--big.form__action--primary {
+    padding: 0.87rem 4rem;
+}
+
+.form__action.form__action--expand-sm-md.button.button--secondary.button--hollow,
+.button--success.button--expand-sm-lg {
+    padding: 1rem 2rem;
+}
+
+.action-card {
+    .action-card__header {
+        .action-card__actions {
+            .link--action {
+                color: $setting-color-require;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    a.form__action.link.link--action.form__action--link {
+        text-decoration: none;
+        font-size: 1rem;
+        width: 100%;
+    }
+}

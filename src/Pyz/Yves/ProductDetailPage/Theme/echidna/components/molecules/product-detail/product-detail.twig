@@ -1,0 +1,47 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-detail',
+    tag: 'section'
+} %}
+
+{% define data = {
+    description: '',
+    attributes: [],
+    product:[]
+} %}
+
+{% block class %}
+	{{parent()}}
+	grid grid--gap grid--justify
+{% endblock %}
+
+{% block body %}
+	<div class="col col--sm-12 col--lg-12">
+		<div class="product-info-tabs">
+			<h2 class="product-info-tab {{ config.name }}__title js-pdp-section__trigger" data-toggle-target='.js-pdp-section__target-description' data-tab="tab1">{{ 'product.attribute.long_description' | trans }}</h2>
+			<h2 class="product-info-tab {{ config.name }}__title title js-pdp-section__trigger" data-toggle-target='.js-pdp-section__target-details' data-tab="tab2">{{ 'page.product.details' | trans }}</h2>
+			<h2 class="product-info-tab {{ config.name }}__title title js-pdp-section__trigger product-review" data-toggle-target='.js-pdp-section__target-review' data-tab="tab3">Review</h2>
+		</div>
+		<div class="product-info-content">
+			<div id="tab1" itemprop="description" class="product-info-pane {{ config.name }}__description js-pdp-section__target-description is-hidden-sm-md">
+				{{ data.description | raw }}
+			</div>
+			<div id="tab2" class="product-info-pane grid {{ config.name }}__detail-list js-pdp-section__target-details is-hidden-sm-md">
+				{% for name, value in data.attributes %}
+					{% if name %}
+						<div class="col col--sm-6 {{ config.name }}__detail-list-item" itemprop="additionalProperty" itemscope itemtype="https://schema.org/PropertyValue">
+							<div class="{{ config.name }}__detail-list-key" itemprop="name">{{ ('product.attribute.' ~ name) | trans }}</div>
+							<div class="{{ config.name }}__detail-list-value" itemprop="value">{{ value }}</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<div id="tab3" itemprop="description" class="product-info-pane {{ config.name }}__description js-pdp-section__target-review is-hidden-sm-md">
+				{% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] only %}{% endwidget %}
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

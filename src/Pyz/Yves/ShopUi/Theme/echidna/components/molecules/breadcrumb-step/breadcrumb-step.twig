@@ -1,0 +1,34 @@
+{% extends molecule('breadcrumb-step', '@SprykerShop:ShopUi') %}
+
+{% define data = {
+    stepNumber: null,
+} %}
+
+{% block body %}
+	{% if data.stepNumber is not empty %}
+		<span class="{{ config.name ~ '__number' }}">{{ data.stepNumber }}</span>
+	{% endif %}
+
+	{%- if isLink -%}
+		<a class="{{ config.name ~ '__link' }}" href="{{ data.url }}">
+			{{- data.label -}}
+		</a>
+	{%- endif -%}
+
+	{%- if isFormElement -%}
+		{% block form %}
+			<form class="{{ config.name }}__form" name="{{ data.formName }}" method="post" action="{{ data.url }}">
+				<input name="{{ data.tokenFieldName }}" type="hidden" value="{{ csrf_token(data.formName) }}">
+				<button class="{{ config.name ~ '__link' }}">{{ block('label') }}</button>
+			</form>
+		{% endblock %}
+	{%- endif -%}
+
+	{% if not isLink and not isFormElement %}
+		{{ block('label') }}
+	{% endif %}
+
+	{% if data.withChevron %}
+		<span class="{{ config.name ~ '__separator' }}">></span>
+	{% endif %}
+{% endblock %}

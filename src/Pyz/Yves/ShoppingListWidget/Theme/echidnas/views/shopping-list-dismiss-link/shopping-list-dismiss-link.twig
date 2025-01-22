@@ -1,0 +1,22 @@
+{% extends template('widget') %}
+
+{% define data = {
+    idShoppingList: _widget.shoppingList.idShoppingList,
+    isOwner: _widget.isOwner
+} %}
+
+{% block body %}
+    {% if data.isOwner == false %}
+        {% block link %}
+            {% include molecule('table-action-link') with {
+                class: 'link link--alt link--action',
+                modifiers: ['tight'],
+                data: {
+                    url: url('shopping-list/dismiss-confirm', { idShoppingList: data.idShoppingList }),
+                    icon: 'dismiss',
+                    title: 'customer.account.shopping_list.overview.dismiss'
+                }
+            } only %}
+        {% endblock %}
+    {% endif %}
+{% endblock %}

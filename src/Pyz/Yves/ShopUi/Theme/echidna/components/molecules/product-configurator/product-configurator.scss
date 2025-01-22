@@ -1,0 +1,177 @@
+@mixin product-detail-page-product-configurator(
+  $name: '.product-configurator'
+) {
+  #{$name} {
+    padding: 0 rem(15) rem(14);
+    margin: 0 rem(-15);
+    border-bottom: solid 1px $setting-color-gray-6;
+
+    @include helper-breakpoint-media-min($lg) {
+      padding: rem(22) 0 0;
+      margin: 0;
+      border-bottom: 0;
+      position: relative;
+    }
+
+    &__top-block {
+      @include helper-breakpoint-media-max($lg - 1) {
+        background: $setting-color-gray-6;
+        padding: rem(15);
+        margin: 0 rem(-15);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    &__brand-name {
+      font-size: rem(16);
+      font-weight: fw(medium);
+      line-height: rem(23);
+      color: $setting-color-gray-5;
+      text-align: right;
+
+      @include helper-breakpoint-media-min($lg) {
+        font-size: rem(18);
+        margin-bottom: rem(3);
+        text-align: left;
+      }
+    }
+
+    &__sku {
+      font-size: rem(13);
+      font-weight: fw(regular);
+      line-height: normal;
+      color: $setting-color-gray-3;
+      text-align: right;
+
+      @include helper-breakpoint-media-min($lg) {
+        font-size: rem(14);
+        margin-bottom: rem(28);
+        text-align: left;
+      }
+    }
+
+    &__bundle {
+      margin-bottom: -1px;
+    }
+
+    &__add-to-cart {
+      padding-top: rem(21);
+      padding-bottom: rem(15);
+
+      @include helper-breakpoint-media-min($lg) {
+        padding-bottom: rem(10);
+      }
+    }
+
+    @content;
+  }
+}
+
+@include product-detail-page-product-configurator;
+
+.product-configurator {
+
+  .quantity-counter--right-space {
+
+    .quantity-counter__button--decrement:hover,
+    .quantity-counter__button--increment:hover {
+      background: $button-setting-color-main;
+    }
+  }
+
+  .add-to-compare-button {
+    .button__compare {
+      width: auto;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+      margin-top: 10px;
+      background-color: $setting-color-secondary-text-color;
+      border-color: $setting-color-secondary-text-color;
+    }
+
+    :hover {
+      background-color: $setting-color-secondary-text-color-hover;
+      border-color: $setting-color-secondary-text-color-hover;
+    }
+  }
+
+  .shared-cart-add-product-as-separate-item {
+    width: 100%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $setting-color-gray-7;
+
+    .checkbox--pdp {
+      margin-left: 0;
+
+      .checkbox__container--pdp {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .button--no-horizontal-padding {
+    width: auto;
+    float: right;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  .product-options {
+    .product-options__item {
+      .custom-select--shopping-list {
+        width: 100%;
+        position: relative;
+        margin-left: 0;
+      }
+    }
+  }
+
+  .custom-element.add-to-compare-button {
+    margin-top: -4.48rem;
+  }
+
+  .product-configurator__add-to-cart {
+    .button--big {
+      padding: 0.7375rem 2rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  .js-shopping-list__form {
+    .product-options {
+      .product-options__item {
+        #shopping-list {
+          margin-bottom: 1.3125rem;
+        }
+      }
+    }
+  }
+
+  .button[disabled],
+  .button--disabled {
+    background-color: $button-setting-color-main !important;
+    border-color: $button-setting-color-main !important;
+  }
+
+  .add-to-compare-button.custom-element.add-to-compare-button {
+    float: right;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+
+  .product-configurator {
+    .shared-cart-add-product-as-separate-item {
+      .checkbox--pdp {
+        .checkbox__container--pdp {
+          .checkbox__label.checkbox__label--pdp.checkbox__label--expand.label {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}

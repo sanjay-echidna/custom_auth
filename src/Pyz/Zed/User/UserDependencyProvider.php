@@ -17,6 +17,9 @@ use Spryker\Zed\User\UserDependencyProvider as SprykerUserDependencyProvider;
 use Spryker\Zed\UserLocale\Communication\Plugin\User\AssignUserLocalePreSavePlugin;
 use Spryker\Zed\UserLocale\Communication\Plugin\User\UserLocaleTransferExpanderPlugin;
 use Spryker\Zed\UserLocaleGui\Communication\Plugin\UserLocaleFormExpanderPlugin;
+use SprykerUFirst\Zed\SecondFactorAuth\Communication\Plugin\Table\SecondFactorAuthUserTableConfigExpanderPlugin;
+use SprykerUFirst\Zed\SecondFactorAuth\Communication\Plugin\Table\SecondFactorAuthUserTableDataExpanderPlugin;
+
 
 class UserDependencyProvider extends SprykerUserDependencyProvider
 {
@@ -62,6 +65,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
     {
         return [
             new UserAgentTableConfigExpanderPlugin(),
+            new SecondFactorAuthUserTableConfigExpanderPlugin(),
         ];
     }
 
@@ -72,6 +76,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
     {
         return [
             new UserAgentTableDataExpanderPlugin(),
+            new SecondFactorAuthUserTableDataExpanderPlugin(),
         ];
     }
 

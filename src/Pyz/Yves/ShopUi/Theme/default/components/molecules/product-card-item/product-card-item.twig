@@ -31,7 +31,6 @@
 {% block body %}
     {% set amountSalesUnit = listItem.amountSalesUnit ?? null %}
     {% set quantitySalesUnit = listItem.quantitySalesUnit ?? null %}
-
     <div class="grid grid--stretch grid--gap">
         <div class="{{ component.renderClass(config.name ~ '__col', modifiers, config.name ~ '__col--image') }} col">
             {% block image %}

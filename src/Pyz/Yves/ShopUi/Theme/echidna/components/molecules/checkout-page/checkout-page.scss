@@ -1,0 +1,304 @@
+.page-layout-main--checkout-page {
+  .container--medium {
+    width: 100%;
+    max-width: 90%;
+
+    .title--checkout {
+      .title__index {
+        color: $button-setting-color-main;
+      }
+    }
+
+    .title__index,
+    .title--second,
+    .title.title--second.col.col--sm-6.col--lg-8 {
+      margin-left: 2.6rem;
+    }
+
+    .form--checkout-address-content > .form__container {
+      max-width: 100%;
+      margin: 0 20px;
+    }
+
+    .form--checkout-form {
+      .form__container {
+        .form__fields {
+          .address-wrapper {
+            border: 0;
+
+            .address-wrapper__header {
+              background-color: $setting-color-white;
+            }
+          }
+        }
+
+        .address-wrapper__header::after {
+          background-color: $setting-color-white;
+        }
+
+        .form__actions {
+          .spacing-top.text-left {
+            margin-left: 2rem;
+          }
+
+          .form__action.spacing-top {
+            padding: 12px 50px;
+          }
+        }
+
+        .address-wrapper__inner-content {
+          max-width: 100%;
+
+          .custom-select__select,
+          .select2-selection__rendered {
+            background-color: $setting-color-white;
+          }
+        }
+      }
+    }
+
+    .link--checkout.text-right {
+      background-color: $button-setting-color-main;
+      border: solid 1px $button-setting-color-main;
+      border-radius: 25px;
+      padding: 15px;
+      color: $setting-color-white;
+      text-align: center !important;
+    }
+
+    .link--checkout.text-right:hover {
+      background-color: $button-setting-color-main-hover;
+      color: $setting-color-white;
+    }
+
+    .link--checkout.text-right {
+      width: 20%;
+      min-width: 20%;
+      margin-right: 40px;
+    }
+
+    .checkbox--expand .checkbox__input:checked ~ .checkbox__box {
+      background-color: $button-setting-color-main;
+      border-color: $button-setting-color-main;
+    }
+
+    .toggler-checkbox--expand {
+      .toggler-checkbox__container--expand {
+        margin-left: 36px;
+        margin-top: -15px;
+
+        .toggler-checkbox__input:checked ~ .toggler-checkbox__box {
+          background-color: $button-setting-color-main;
+          border-color: $button-setting-color-main;
+        }
+      }
+    }
+
+    .address-wrapper__content.address-wrapper__content--mobile-background.js-address__billing.grid.grid--bottom.grid--wide {
+      padding: 1.25rem 2rem 1.5625rem;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .container--medium {
+      .title--checkout {
+        margin-left: 0;
+      }
+    }
+  }
+
+  //-----------------------Shipping---------------------------------------
+
+  .container--checkout {
+    .title--checkout {
+      .title__index {
+        color: $button-setting-color-main;
+      }
+    }
+
+    .shipment-sidebar {
+      .shipment-sidebar__item {
+        background-color: $setting-color-white;
+        border: 0.125rem solid $setting-color-gray-7;
+
+        .date-time-picker__content {
+          .date-time-picker__icon {
+            fill: $button-setting-color-main;
+          }
+        }
+      }
+
+
+      .checkout-list {
+        .checkout-list__item {
+          .radio--expand {
+            border-top: 0.0625rem solid $setting-color-gray-6;
+          }
+
+          .radio:hover .radio__box {
+            border-color: $button-setting-color-main;
+          }
+        }
+      }
+    }
+
+    .form--checkout-form {
+      .form__container {
+        .form__actions {
+          .button--back {
+            background-color: $setting-color-secondary-text-color;
+            color: $setting-color-white;
+            padding: 12px 50px;
+            font-weight: 500;
+          }
+
+          :hover {
+            background-color: $button-setting-color-main-hover;
+          }
+
+          .form__action--expand-sm-md {
+            padding: 12px 50px;
+          }
+        }
+
+        .spacing-bottom--small {
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    .radio--checkout .radio__input:checked ~ .radio__box {
+      box-shadow: inset 0 0 0 0.25rem $button-setting-color-main;
+    }
+
+    .radio__input:checked ~ .radio__box {
+      border-color: $button-setting-color-main;
+    }
+
+    .radio__container {
+      .radio__label--expand {
+        color: $setting-color-black;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .container--medium {
+      background-color: $setting-color-white;
+      max-width: 62.5rem;
+      width: 100%;
+
+      .title__index,
+      .title--second,
+      .title.title--second.col.col--sm-6.col--lg-8 {
+        margin-left: 0;
+      }
+
+      .link--checkout.text-right {
+        width: auto;
+        min-width: 0;
+        margin-right: 0;
+      }
+
+      .toggler-checkbox--expand {
+        .toggler-checkbox__container--expand {
+          margin-left: 0;
+        }
+      }
+
+      .form--checkout-address-content > .form__container {
+        max-width: 44.375rem;
+        margin: 0 auto;
+      }
+
+      .address-wrapper__content.address-wrapper__content--mobile-background.js-address__billing.grid.grid--bottom.grid--wide {
+        padding: 0;
+      }
+
+      .form--checkout-form {
+        .form__container {
+          .form__actions {
+            .spacing-top.text-left {
+              text-align: right;
+              margin-left: 0;
+              margin-top: 0.5rem;
+            }
+
+            .form__action.spacing-top {
+              padding: 0.9375rem 2rem;
+            }
+          }
+
+          .address-wrapper {
+            .address-wrapper__header {
+              padding: 0;
+            }
+          }
+
+          .js-address__form-handler-billingSameAsShipping {
+            .toggler-checkbox--checkbox {
+              margin-top: 0;
+            }
+          }
+        }
+      }
+
+      .form--checkout-address-content.address-wrapper__content.address-wrapper__content--mobile-background.js-address__shipping {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+
+  //---------------------------Payment---------------------------------
+
+  .container--small {
+    .title--checkout {
+      .title__index {
+        color: $button-setting-color-main;
+      }
+    }
+
+    .form--checkout-form {
+      .form__actions {
+        .button--back {
+          background-color: $setting-color-secondary-text-color;
+          color: $setting-color-white;
+          padding: 17px 50px;
+          font-weight: 500;
+        }
+
+        :hover {
+          background-color: $setting-color-secondary-text-color-hover;
+        }
+      }
+
+      .toggler-radio--checkout {
+        .toggler-radio__container--expand {
+          .toggler-radio__box--expand:hover {
+            border-color: $button-setting-color-main-hover;
+          }
+        }
+
+        .toggler-radio__label {
+          color: $setting-color-black;
+        }
+      }
+
+      .toggler-radio--checkout .toggler-radio__input:checked ~ .toggler-radio__box {
+        box-shadow: inset 0 0 0 0.25rem $button-setting-color-main;
+        border-color: $button-setting-color-main;
+      }
+    }
+  }
+
+  .button[disabled],
+  .button--disabled {
+    background-color: $button-setting-color-main !important;
+    border-color: $button-setting-color-main !important;
+  }
+}
+
+.title--checkout {
+  margin-left: 40px;
+}

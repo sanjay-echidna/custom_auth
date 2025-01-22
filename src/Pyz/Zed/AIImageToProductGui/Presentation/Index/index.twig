@@ -1,0 +1,31 @@
+{% extends '@Application/Layout/layout.twig' %}
+
+{% set widget_title = 'Generate Product With AI' | trans %}
+
+{% block head_title widget_title %}
+{% block section_title %}{{ widget_title }}{% endblock %}
+
+
+{% block action %}
+    {{ backActionButton('/product-management', 'List Products' | trans) }}
+{% endblock %}
+
+
+{% block content %}
+
+    {% embed '@Gui/Partials/widget.twig' %}
+ 
+        {% block widget_content %}
+ 
+             {{ form_start(form) }}
+                {{ form_widget(form) }}
+
+                <input type="submit" class="btn btn-primary safe-submit" value="{{ 'Save' | trans }}" />
+            {{ form_end(form) }}
+ 
+        {% endblock %}
+ 
+    {% endembed %}
+
+{% endblock %}
+

@@ -1,0 +1,86 @@
+{% extends model('component') %}
+
+ {% define config = {
+     name: 'new-panel-info-item',
+ } %}
+
+{% define data = {
+    info: required,
+} %}
+
+{% block body %}
+    <div class="col col--sm-12 col--lg-12 toppanel">
+
+        <div class="col col--sm-12 col--lg-6 contact-left is-hidden-sm-md">
+
+            <ul class="col grid--nowrap navigation-top__actions">
+
+                <li class="col {{ config.name }}__action-item {{ config.name }}__action-item--tel">
+                    {% include atom('icon') with {
+                        modifiers: ['phone'],
+                        data: {
+                            name: 'phone'
+                        }
+                    } only %}
+                    {% set phoneNumberTranslation = 'global.phone.number' | trans %}
+                    <a href="tel:{{ phoneNumberTranslation }}" title="Telephone Number">{{ phoneNumberTranslation }}</a>
+                </li>
+
+                <li class="col {{ config.name }}__action-item {{ config.name }}__action-item--tel">
+                    {% include atom('icon') with {
+                        modifiers: ['email'],
+                        data: {name: 'email'}
+                    } only %}
+                    {% set emailTranslation = 'global.email.text' | trans %}
+                    <a href="mailto:{{ emailTranslation }}"
+                       title="Email Address">{{ emailTranslation }}</a>
+                </li>
+
+                {# <li class="col {{ config.name }}__action-item {{ config.name }}__action-item--tel">
+
+													{% widget 'StoreCreditWidget' args [param1] only %}{% endwidget %}
+
+
+												</li> #}
+
+
+            </ul>
+
+
+        </div>
+
+        <div class="col col--sm-12 col--lg-6 store-right">
+            <ul class="col grid--nowrap navigation-top__actions">
+
+                {% if can('SeePricePermissionPlugin') %}
+                    <li class="col {{ config.name }}__action-item">
+                        {% widget 'PriceModeSwitcherWidget' only %}{% endwidget %}
+                    </li>
+
+                    <li class="col {{ config.name }}__action-item">
+                        {% widget 'CurrencyWidget' only %}{% endwidget %}
+                    </li>
+                {% endif %}
+
+                <li class="col {{ config.name }}__action-item">
+                    {% widget 'LanguageSwitcherWidget' args [app.request.pathInfo, app.request.queryString, app.request.requestUri] only %}{% endwidget %}
+                </li>
+
+                {% set menuItemCompanyWidget = findWidget('MenuItemCompanyWidget') %}
+                {% set hasCompanyAccess = menuItemCompanyWidget.hasCompanyAccess %}
+
+                {% if is_granted('ROLE_USER') and hasCompanyAccess %}
+                    {% widget menuItemCompanyWidget %}
+                        {% block template %}
+                            <li class="col {{ config.name }}__action-item">
+                                {% apply spaceless %}{{ parent() }}{% endapply %}
+                            </li>
+                        {% endblock %}
+                    {% endwidget %}
+                {% endif %}
+
+
+            </ul>
+        </div>
+    </div>
+{% endblock %}

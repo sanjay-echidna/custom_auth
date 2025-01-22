@@ -239,7 +239,7 @@ docker:
         redirect: true
 
     testing:
-        region: EU
+        region: US
 
     debug:
         enabled: true
